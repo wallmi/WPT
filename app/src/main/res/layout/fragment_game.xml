@@ -20,23 +20,34 @@
             android:text="@string/name"
             android:textSize="18pt" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:text="@string/angesagt" />
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="@string/angesagt"
+                android:textSize="8pt" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="@string/gemacht"
+                android:textSize="8pt" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:text="@string/gemacht" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:text="@string/punkte" />
+            android:text="@string/punkte"
+            android:textAlignment="textEnd"
+            android:textSize="10pt" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,9 +86,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -93,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,9 +128,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -135,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,9 +169,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -176,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -200,9 +211,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -218,7 +229,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -242,9 +253,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -260,7 +271,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="14pt" />
+            android:textSize="12pt" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -284,9 +295,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:text="0"
+            android:text="@string/Null"
             android:textAlignment="center"
-            android:textSize="14pt"
+            android:textSize="12pt"
             android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

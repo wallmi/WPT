@@ -34,7 +34,6 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         //Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -62,9 +61,9 @@ public class Game extends AppCompatActivity {
         for (int i=1; i <=rounds; i++)
             tabs[i-1] = "Runde "+i;
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(new MyAdapter(
-                toolbar.getContext(),
+                findViewById(R.id.toolbar).getContext(),
                 tabs));
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -91,13 +90,13 @@ public class Game extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, "Runde beendet", Snackbar.LENGTH_LONG)
+                RoundFragment.finish();
+                Long round = spinner.getSelectedItemId();
+
+                Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                RoundFragment.finish();
-
-                //TODO: nächste Runde springen
-
+                spinner.setSelection(round.intValue()+1,true);
             }
         });
     }
