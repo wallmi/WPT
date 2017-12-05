@@ -27,4 +27,5 @@
     <string name="copyright" translatable="false">(C) Michael Wallner</string>
     <string name="version" translatable="false">Version 0.1 beta</string>
     <string name="player_1">Player 1</string>
+    <string name="dummy1" translatable="false">Dummy1</string>
 </resources>

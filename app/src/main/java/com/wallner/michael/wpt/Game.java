@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.content.Context;
 import android.support.v7.widget.ThemedSpinnerAdapter;
@@ -140,13 +141,13 @@ public class Game extends AppCompatActivity {
         private TextView p3_name;        private TextView p4_name;
         private TextView p5_name;        private TextView p6_name;
 
-        private NumberPicker p1_hip;     private NumberPicker p2_hip;
-        private NumberPicker p3_hip;     private NumberPicker p4_hip;
-        private NumberPicker p5_hip;    private NumberPicker p6_hip;
+        private SeekBar p1_hip;     private SeekBar p2_hip;
+        private SeekBar p3_hip;     private SeekBar p4_hip;
+        private SeekBar p5_hip;     private SeekBar p6_hip;
 
-        private NumberPicker p1_done;    private NumberPicker p2_done;
-        private NumberPicker p3_done;    private NumberPicker p4_done;
-        private NumberPicker p5_done;    private  NumberPicker p6_done;
+        private SeekBar p1_done;    private SeekBar p2_done;
+        private SeekBar p3_done;    private SeekBar p4_done;
+        private SeekBar p5_done;    private SeekBar p6_done;
 
         private TextView p1_points;      private TextView p2_points;
         private TextView p3_points;      private TextView p4_points;
@@ -244,40 +245,29 @@ public class Game extends AppCompatActivity {
             if (anzp >= 6)
                 p6_name.setText(playernames[5]);
 
+            p1_hip.setMax(round);        p2_hip.setMax(round);
+            p3_hip.setMax(round);        p4_hip.setMax(round);
+            p5_hip.setMax(round);        p6_hip.setMax(round);
+
+            p1_done.setMax(round);       p2_done.setMax(round);
+            p3_done.setMax(round);       p4_done.setMax(round);
+            p5_done.setMax(round);       p6_done.setMax(round);
 
 
-            //TODO: setMinValue in layout
-            p1_hip.setMinValue(0);            p2_hip.setMinValue(0);
-            p3_hip.setMinValue(0);            p4_hip.setMinValue(0);
-            p5_hip.setMinValue(0);            p6_hip.setMinValue(0);
+            //p1_hip.setOnValueChangedListener(this);
+            //p2_hip.setOnValueChangedListener(this);
+            //p3_hip.setOnValueChangedListener(this);
+            //p4_hip.setOnValueChangedListener(this);
+            //p5_hip.setOnValueChangedListener(this);
+            //p6_hip.setOnValueChangedListener(this);
 
-            p1_done.setMinValue(0);           p2_done.setMinValue(0);
-            p3_done.setMinValue(0);           p4_done.setMinValue(0);
-            p5_done.setMinValue(0);           p6_done.setMinValue(0);
+            //p1_done.setOnValueChangedListener(this);
+            //p2_done.setOnValueChangedListener(this);
+            //p3_done.setOnValueChangedListener(this);
+            //p4_done.setOnValueChangedListener(this);
+            //p5_done.setOnValueChangedListener(this);
+            // p6_done.setOnValueChangedListener(this);
 
-            p1_hip.setMaxValue(round);        p2_hip.setMaxValue(round);
-            p3_hip.setMaxValue(round);        p4_hip.setMaxValue(round);
-            p5_hip.setMaxValue(round);        p6_hip.setMaxValue(round);
-
-            p1_done.setMaxValue(round);       p2_done.setMaxValue(round);
-            p3_done.setMaxValue(round);       p4_done.setMaxValue(round);
-            p5_done.setMaxValue(round);       p6_done.setMaxValue(round);
-
-            /*
-            p1_hip.setOnValueChangedListener(this);
-            p2_hip.setOnValueChangedListener(this);
-            p3_hip.setOnValueChangedListener(this);
-            p4_hip.setOnValueChangedListener(this);
-            p5_hip.setOnValueChangedListener(this);
-            p6_hip.setOnValueChangedListener(this);
-
-            p1_done.setOnValueChangedListener(this);
-            p2_done.setOnValueChangedListener(this);
-            p3_done.setOnValueChangedListener(this);
-            p4_done.setOnValueChangedListener(this);
-            p5_done.setOnValueChangedListener(this);
-            p6_done.setOnValueChangedListener(this);
-            */
 
             return rootView;
         }
@@ -286,7 +276,8 @@ public class Game extends AppCompatActivity {
         //TODO: Aktuell Endloschleife
         //
 
-       /* @Override
+        /*
+        @Override
         public void onValueChange(NumberPicker p, int oldVal, int newVal) {
             help h = new help();
 

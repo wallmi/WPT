@@ -16,8 +16,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="@string/name" />
+            android:layout_weight="6"
+            android:text="@string/name"
+            android:textSize="18pt" />
 
         <TextView
             android:layout_width="match_parent"
@@ -48,27 +49,32 @@
             android:id="@+id/p1_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
 
-        <NumberPicker
-            android:id="@+id/p1_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p1_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p1_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p1_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p1_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
@@ -85,27 +91,32 @@
             android:id="@+id/p2_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
 
-        <NumberPicker
-            android:id="@+id/p2_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p2_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p2_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p2_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p2_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
@@ -122,27 +133,31 @@
             android:id="@+id/p3_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
-
-        <NumberPicker
-            android:id="@+id/p3_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p3_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p3_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p3_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p3_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
@@ -159,27 +174,32 @@
             android:id="@+id/p4_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
 
-        <NumberPicker
-            android:id="@+id/p4_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p4_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p4_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p4_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p4_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
@@ -196,27 +216,32 @@
             android:id="@+id/p5_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
 
-        <NumberPicker
-            android:id="@+id/p5_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p5_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p5_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p5_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p5_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
@@ -233,27 +258,32 @@
             android:id="@+id/p6_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Dummy1"
+            android:layout_weight="6"
+            android:text="@string/dummy1"
             android:textSize="14pt" />
 
-        <NumberPicker
-            android:id="@+id/p6_hip"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:orientation="vertical">
 
-        <NumberPicker
-            android:id="@+id/p6_done"
-            android:layout_width="match_parent"
-            android:layout_height="16pt"
-            android:layout_weight="8" />
+            <SeekBar
+                android:id="@+id/p6_hip"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <SeekBar
+                android:id="@+id/p6_done"
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/p6_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
             android:text="0"
             android:textAlignment="center"
             android:textSize="14pt"
