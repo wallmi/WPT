@@ -153,7 +153,7 @@ class WPTDataSource {
         String[] selectionArgs = { gameID.toString() };
 
         //Delete all Rounds
-        database.delete(FeedReaderDbHelper.TABLE_ROUNDS, "gameID"
+        database.delete(FeedReaderDbHelper.TABLE_ROUNDS, "game_ID"
                 + " = ?", selectionArgs);
 
         //Delte the game

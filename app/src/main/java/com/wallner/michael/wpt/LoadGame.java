@@ -24,7 +24,7 @@ public class LoadGame extends AppCompatActivity {
         db.open();
 
         final String[][] games = db.getGames();
-        lv_games = (ListView) findViewById(R.id.lv_games);
+        lv_games = findViewById(R.id.lv_games);
 
         final ArrayList<String> list = new ArrayList<>();
 
@@ -56,6 +56,20 @@ public class LoadGame extends AppCompatActivity {
                 loadGame(gameID);
             }
         });
+
+        // ListView Item LongClick Listener
+        lv_games.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                Integer gameID = Integer.parseInt(games[position][0]);
+                deleteGame(gameID);
+                finish();
+                startActivity(getIntent());
+                return true;
+            }
+        });
     }
     //Starten des Dialoges SelectPlayer
     public void loadGame (Integer gameID) {
@@ -65,5 +79,12 @@ public class LoadGame extends AppCompatActivity {
         intent.putExtra("GameID",gameID);
         //Starte Activity Spiel
         startActivity(intent);
+    }
+
+    public void deleteGame(Integer gameID){
+        WPTDataSource db = new WPTDataSource(this);
+        db.open();
+        db.deleteGame(gameID);
+        db.close();
     }
 }
