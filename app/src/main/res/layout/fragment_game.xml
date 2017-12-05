@@ -1,0 +1,262 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.wallner.michael.wpt.Game$RoundFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/name" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/angesagt" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/gemacht" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="@string/punkte" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p1_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p1_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p1_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p1_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p2_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p2_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p2_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p2_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p3_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p3_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p3_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p3_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p4_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p4_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p4_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p4_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p5_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p5_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p5_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p5_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/p6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/p6_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Dummy1"
+            android:textSize="14pt" />
+
+        <NumberPicker
+            android:id="@+id/p6_hip"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <NumberPicker
+            android:id="@+id/p6_done"
+            android:layout_width="match_parent"
+            android:layout_height="16pt"
+            android:layout_weight="8" />
+
+        <TextView
+            android:id="@+id/p6_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="14pt"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

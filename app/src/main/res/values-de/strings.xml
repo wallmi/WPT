@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wizard Punkte</string>
+    <string name="StartGame">Starte Spiel</string>
+    <string name="action_settings">Einstellung</string>
+    <string name="angesagt">angesagt</string>
+    <string name="b_loadgame">Lade Spiel</string>
+    <string name="b_newgame">Neues Spiel</string>
+    <string name="erster_geber">Erster Geber</string>
+    <string name="name">Name</string>
+    <string name="player_1">Spieler 1</string>
+    <string name="player_2">Spieler 2</string>
+    <string name="player_3">Spieler 3</string>
+    <string name="player_4">Spieler 4</string>
+    <string name="player_5">Spieler 5</string>
+    <string name="player_6">Spieler 6</string>
+    <string name="t_player">Anzahl Spieler</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="punkte">Punkte</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="gemacht">gemacht</string>
+</resources>
