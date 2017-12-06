@@ -3,7 +3,6 @@ package com.wallner.michael.wpt;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.content.Context;
@@ -61,7 +59,7 @@ public class Game extends AppCompatActivity {
         for (int i=1; i <=rounds; i++)
             tabs[i-1] = "Runde "+i;
 
-        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(new MyAdapter(
                 findViewById(R.id.toolbar).getContext(),
                 tabs));
@@ -85,7 +83,7 @@ public class Game extends AppCompatActivity {
         //status.setText("Test");
 
         //Action Item
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,7 +126,10 @@ public class Game extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     //public static class RoundFragment extends Fragment implements NumberPicker.OnValueChangeListener {
-    public static class RoundFragment extends Fragment {
+    //public static class RoundFragment extends Fragment {
+      public static class RoundFragment extends Fragment
+            implements SeekBar.OnSeekBarChangeListener {
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -177,7 +178,7 @@ public class Game extends AppCompatActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+                                 Bundle savedInstanceState)  {
             View rootView = inflater.inflate(R.layout.fragment_game, container, false);
             //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -219,6 +220,8 @@ public class Game extends AppCompatActivity {
             WPTDataSource db = new WPTDataSource(getContext());
             db.open();
 
+            db.addRound(gameID,round);
+
             //int anzp = Integer.parseInt(o.getValue("anzplayer"));
             int anzp = db.getAnzPlayerbyGameID(gameID);
 
@@ -253,53 +256,65 @@ public class Game extends AppCompatActivity {
             p5_done.setMax(round);       p6_done.setMax(round);
 
 
-            //p1_hip.setOnValueChangedListener(this);
-            //p2_hip.setOnValueChangedListener(this);
-            //p3_hip.setOnValueChangedListener(this);
-            //p4_hip.setOnValueChangedListener(this);
-            //p5_hip.setOnValueChangedListener(this);
-            //p6_hip.setOnValueChangedListener(this);
+            p1_hip.setOnSeekBarChangeListener(this);
+            p1_hip.setOnSeekBarChangeListener(this);
+            p2_hip.setOnSeekBarChangeListener(this);
+            p3_hip.setOnSeekBarChangeListener(this);
+            p4_hip.setOnSeekBarChangeListener(this);
+            p5_hip.setOnSeekBarChangeListener(this);
+            p6_hip.setOnSeekBarChangeListener(this);
 
-            //p1_done.setOnValueChangedListener(this);
-            //p2_done.setOnValueChangedListener(this);
-            //p3_done.setOnValueChangedListener(this);
-            //p4_done.setOnValueChangedListener(this);
-            //p5_done.setOnValueChangedListener(this);
-            // p6_done.setOnValueChangedListener(this);
+            p1_done.setOnSeekBarChangeListener(this);
+            p2_done.setOnSeekBarChangeListener(this);
+            p3_done.setOnSeekBarChangeListener(this);
+            p4_done.setOnSeekBarChangeListener(this);
+            p5_done.setOnSeekBarChangeListener(this);
+            p6_done.setOnSeekBarChangeListener(this);
+
+            db.close();
 
 
             return rootView;
         }
 
-        //Change Event an den 2 Piker, Hip and done
-        //TODO: Aktuell Endloschleife
-        //
-
-        /*
         @Override
-        public void onValueChange(NumberPicker p, int oldVal, int newVal) {
+        public void onProgressChanged(SeekBar p, int progress,boolean fromUser) {
             help h = new help();
 
+            Integer round = getArguments().getInt(ROUND_NUMBER);
+            Integer gameID = getArguments().getInt(GAME_ID);
+
+            WPTDataSource db = new WPTDataSource(getContext());
+            db.open();
+
             if (p.getId() == p1_done.getId() || p.getId() == p1_hip.getId())
-               p1_points.setText(h.getPoints(p1_hip.getValue(),p1_done.getValue()).toString());
+                p1_points.setText(h.int2string(h.getPoints(p1_hip.getProgress(), p1_done.getProgress())));
 
             if (p.getId() == p2_done.getId() || p.getId() == p2_hip.getId())
-                p2_points.setText(h.getPoints(p2_hip.getValue(),p2_done.getValue()).toString());
+                p2_points.setText(h.int2string(h.getPoints(p2_hip.getProgress(),p2_done.getProgress())));
 
             if (p.getId() == p3_done.getId() || p.getId() == p3_hip.getId())
-                p3_points.setText(h.getPoints(p3_hip.getValue(),p3_done.getValue()).toString());
+                p3_points.setText(h.int2string(h.getPoints(p3_hip.getProgress(),p3_done.getProgress())));
 
             if (p.getId() == p4_done.getId() || p.getId() == p4_hip.getId())
-                p4_points.setText(h.getPoints(p4_hip.getValue(),p4_done.getValue()).toString());
+                p4_points.setText(h.int2string(h.getPoints(p4_hip.getProgress(),p4_done.getProgress())));
 
             if (p.getId() == p5_done.getId() || p.getId() == p5_hip.getId())
-                p5_points.setText(h.getPoints(p5_hip.getValue(),p5_done.getValue()).toString());
+                p5_points.setText(h.int2string(h.getPoints(p5_hip.getProgress(),p5_done.getProgress())));
 
             if (p.getId() == p6_done.getId() || p.getId() == p6_hip.getId())
-                p6_points.setText(h.getPoints(p6_hip.getValue(),p6_done.getValue()).toString());
-        }*/
-    }
+                p6_points.setText(h.int2string(h.getPoints(p6_hip.getProgress(),p6_done.getProgress())));
 
+            db.setPoints(gameID, round, p.getTag().toString(), p.getProgress());
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {        }
+    }
 
 
     private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
@@ -322,7 +337,7 @@ public class Game extends AppCompatActivity {
                 view = convertView;
             }
 
-            TextView textView = (TextView) view.findViewById(android.R.id.text1);
+            TextView textView = view.findViewById(android.R.id.text1);
             textView.setText(getItem(position));
 
             return view;

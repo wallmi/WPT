@@ -35,4 +35,11 @@ class help {
         if (hip < done)     return (hip - done)*10;
         return 20 + hip * 10;
     }
+
+    String int2string (Integer i) {
+        if (i == null)
+            return "0";
+
+        return String.format( "%d", i);
+    }
 }

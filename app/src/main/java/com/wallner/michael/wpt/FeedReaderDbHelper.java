@@ -35,7 +35,7 @@ class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String SQL_GAMES_TABLE_CREATE = "CREATE TABLE "
         + TABLE_GAMES + " ( "
         + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-        + "AnzPlayer	INTEGER NOT NULL, "
+        + "AnzPlayer INTEGER NOT NULL, "
         + "GameName	TEXT, "
         + "p1_name TEXT, "
         + "p2_name TEXT, "
@@ -46,7 +46,6 @@ class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_ROUNDS_TABLE_CREATE = "CREATE TABLE "
         + TABLE_ROUNDS + " ( "
-        + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 	    + "game_ID INTEGER NOT NULL, "              //ID from Table games
         + "round_nr INTEGER NOT NULL, "             //Round Number
         + "p1_hip INTEGER DEFAULT 0, "
@@ -61,7 +60,9 @@ class FeedReaderDbHelper extends SQLiteOpenHelper {
         + "p4_done INTEGER DEFAULT 0, "
         + "p5_done INTEGER DEFAULT 0, "
         + "p6_done INTEGER DEFAULT 0, "
-        + "round_finished INTEGER DEFAULT 0);";     //1 if round is finished
+        + "round_finished INTEGER DEFAULT 0" //1 if round is finished
+        + "PRIMARY KEY(`game_ID`,`round_nr`)"
+        +   ");";
 
     /**
     public void delOptTable (SQLiteDatabase db) {

@@ -187,4 +187,23 @@ class WPTDataSource {
         cursor.close();
         return Games;
     }
+
+    void setPoints (Integer gameID, Integer roundNr, String field, int value) {
+
+        ContentValues values = new ContentValues();
+        values.put(field, value);
+
+        String[] selectionArgs ={gameID.toString(), roundNr.toString()};
+
+        database.update("rounds", values,
+                "game_ID=? AND round_nr=?", selectionArgs);
+    }
+
+    void addRound (Integer gameID, Integer roundNr){
+        ContentValues values = new ContentValues();
+        values.put("game_ID", gameID);
+        values.put("round_nr", roundNr);
+
+        database.insert("rounds", null, values);
+    }
 }
