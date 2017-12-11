@@ -29,14 +29,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
                 android:text="@string/angesagt"
                 android:textSize="8pt" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
                 android:text="@string/gemacht"
                 android:textSize="8pt" />
         </LinearLayout>
@@ -72,13 +70,11 @@
 
             <SeekBar
                 android:id="@+id/p1_hip"
-                android:tag="p1_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p1_done"
-                android:tag="p1_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
@@ -116,13 +112,11 @@
 
             <SeekBar
                 android:id="@+id/p2_hip"
-                android:tag="p2_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p2_done"
-                android:tag="p2_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
@@ -159,13 +153,11 @@
 
             <SeekBar
                 android:id="@+id/p3_hip"
-                android:tag="p3_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p3_done"
-                android:tag="p3_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
@@ -203,13 +195,11 @@
 
             <SeekBar
                 android:id="@+id/p4_hip"
-                android:tag="p4_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p4_done"
-                android:tag="p4_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
@@ -247,13 +237,11 @@
 
             <SeekBar
                 android:id="@+id/p5_hip"
-                android:tag="p5_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p5_done"
-                android:tag="p5_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
@@ -291,13 +279,11 @@
 
             <SeekBar
                 android:id="@+id/p6_hip"
-                android:tag="p6_hip"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p6_done"
-                android:tag="p6_done"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>

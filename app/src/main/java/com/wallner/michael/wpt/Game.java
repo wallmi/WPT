@@ -1,5 +1,6 @@
 package com.wallner.michael.wpt;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,9 @@ public class Game extends AppCompatActivity {
         WPTDataSource db = new WPTDataSource(this);
         db.open();
 
+
         final int gameID = this.getIntent().getExtras().getInt("GameID",-1);
+
         int anzplayer = db.getAnzPlayerbyGameID(gameID);
         int rounds = 0;
 
@@ -171,8 +174,7 @@ public class Game extends AppCompatActivity {
         }
 
         public static void finish (){
-            help h = new help();
-
+            //help h = new help();
             //p1_points.setText(h.getPoints(p1_hip.getValue(),p1_done.getValue()).toString());
         }
 
@@ -255,6 +257,21 @@ public class Game extends AppCompatActivity {
             p3_done.setMax(round);       p4_done.setMax(round);
             p5_done.setMax(round);       p6_done.setMax(round);
 
+            p1_hip.setTag(DbHelp.COLUMN_ROUNDS_P1_HIP);
+            p2_hip.setTag(DbHelp.COLUMN_ROUNDS_P2_HIP);
+            p3_hip.setTag(DbHelp.COLUMN_ROUNDS_P3_HIP);
+            p4_hip.setTag(DbHelp.COLUMN_ROUNDS_P4_HIP);
+            p5_hip.setTag(DbHelp.COLUMN_ROUNDS_P5_HIP);
+            p6_hip.setTag(DbHelp.COLUMN_ROUNDS_P6_HIP);
+
+            p1_done.setTag(DbHelp.COLUMN_ROUNDS_P1_DONE);
+            p2_done.setTag(DbHelp.COLUMN_ROUNDS_P2_DONE);
+            p3_done.setTag(DbHelp.COLUMN_ROUNDS_P3_DONE);
+            p4_done.setTag(DbHelp.COLUMN_ROUNDS_P4_DONE);
+            p5_done.setTag(DbHelp.COLUMN_ROUNDS_P5_DONE);
+            p6_done.setTag(DbHelp.COLUMN_ROUNDS_P6_DONE);
+
+
 
             p1_hip.setOnSeekBarChangeListener(this);
             p1_hip.setOnSeekBarChangeListener(this);
@@ -320,13 +337,13 @@ public class Game extends AppCompatActivity {
     private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
         private final ThemedSpinnerAdapter.Helper mDropDownHelper;
 
-        public MyAdapter(Context context, String[] objects) {
+        MyAdapter(Context context, String[] objects) {
             super(context, android.R.layout.simple_list_item_1, objects);
             mDropDownHelper = new ThemedSpinnerAdapter.Helper(context);
         }
 
         @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
             View view;
 
             if (convertView == null) {

@@ -11,58 +11,48 @@ class WPTDataSource {
 
     // Database fields
     private SQLiteDatabase database;
-    private FeedReaderDbHelper dbHelper;
+    private final DbHelp dbH;
 
 
     WPTDataSource(Context context) {
-        dbHelper = new FeedReaderDbHelper(context);
+        dbH = new DbHelp(context);
     }
 
     void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        database = dbH.getWritableDatabase();
     }
 
     void close() {
-        dbHelper.close();
+        dbH.close();
     }
 
-    //TODO: Setoption erstellen
-    long createOption(String Opt, String value) {
-        deleteOption(Opt);
+    void setOption (String Opt, String value) {
         ContentValues values = new ContentValues();
-        values.put(FeedReaderDbHelper.COLUMN_NAME_OPT, Opt);
-        values.put(FeedReaderDbHelper.COLUMN_NAME_VAL, value);
+        values.put(DbHelp.COLUMN_OPT_OPT, Opt);
+        values.put(DbHelp.COLUMN_OPT_VAL, value);
 
-        // Insert the new row, returning the primary key value of the new row
-        return database.insert(FeedReaderDbHelper.TABLE_OPT, null, values);
-    }
-
-    private void deleteOption(String opt) {
-        //System.out.println("Comment deleted with id: " + opt);
-        String[] selectionArgs = { opt };
-        database.delete(FeedReaderDbHelper.TABLE_OPT, FeedReaderDbHelper.COLUMN_NAME_OPT
-                + " = ?", selectionArgs);
+        database.replace(DbHelp.TABLE_OPT, null,values);
     }
 
     String getOpt (String opt) {
-        String Selection = FeedReaderDbHelper.COLUMN_NAME_OPT + " = ?";
+        String Selection = DbHelp.COLUMN_OPT_OPT + " = ?";
         String[] selectionArgs = { opt };
-        String[] selectionName = { FeedReaderDbHelper.COLUMN_NAME_VAL };
+        String[] selectionName = { DbHelp.COLUMN_OPT_VAL };
 
         Cursor cursor = database.query(
-                FeedReaderDbHelper.TABLE_OPT,              // The table to query
-                selectionName,                             // The columns to return
-                Selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
+                DbHelp.TABLE_OPT,          // The table to query
+                selectionName,                         // The columns to return
+                Selection,                             // The columns for the WHERE clause
+                selectionArgs,                         // The values for the WHERE clause
+                null,                         // don't group the rows
+                null,                           // don't filter by row groups
+                null                           // The sort order
         );
 
        String value = "";
         while(cursor.moveToNext()) {
             value = cursor.getString(
-                    cursor.getColumnIndexOrThrow(FeedReaderDbHelper.COLUMN_NAME_VAL));
+                    cursor.getColumnIndexOrThrow(DbHelp.COLUMN_OPT_VAL));
         }
         cursor.close();
         return value;
@@ -70,21 +60,21 @@ class WPTDataSource {
 
     //Aus Optionen
     String[] getPlayers() {
-        int anzplayer = Integer.parseInt(getOpt("anzplayer"));
+        int anzplayer = Integer.parseInt(getOpt(DbHelp.OPT_ANZPLAYER));
         String players[] = new String[anzplayer];
-        for (int i=1; i <=anzplayer; i++)
-            players[i-1] = getOpt("playername"+i);
+        for (int i=0; i <anzplayer; i++)
+            players[i] = getOpt(DbHelp.OPT_NAMES[i]);
 
         return players;
     }
 
     Integer getAnzPlayerbyGameID(Integer gameID) {
-        String Selection = "ID = ?";
+        String Selection = DbHelp.COLUMN_GAMES_ID + "= ?";
         String[] selectionArgs = { gameID.toString() };
-        String[] selectionName = { "AnzPlayer"};
+        String[] selectionName = { DbHelp.COLUMN_GAMES_ANZPLAYER};
 
         Cursor cursor = database.query(
-                FeedReaderDbHelper.TABLE_GAMES,              // The table to query
+                DbHelp.TABLE_GAMES,              // The table to query
                 selectionName,                             // The columns to return
                 Selection,                                // The columns for the WHERE clause
                 selectionArgs,                            // The values for the WHERE clause
@@ -95,20 +85,25 @@ class WPTDataSource {
 
         String value = "";
         while(cursor.moveToNext()) {
-            value = cursor.getString(cursor.getColumnIndexOrThrow("AnzPlayer"));
+            value = cursor.getString(cursor.getColumnIndexOrThrow(DbHelp.COLUMN_GAMES_ANZPLAYER));
         }
         cursor.close();
         return Integer.parseInt(value);
     }
 
     String[] getPlayerNamesbyGameID (Integer gameID) {
-        String Selection = "ID = ?";
+        String Selection = DbHelp.COLUMN_GAMES_ID + "= ?";
         String[] selectionArgs = { gameID.toString() };
-        String[] selectionName = { "p1_name" , "p2_name", "p3_name", "p4_name",
-                "p5_name", "p6_name"};
+        String[] selectionName = { DbHelp.COLUMN_GAMES_P1 ,
+                DbHelp.COLUMN_GAMES_P2,
+                DbHelp.COLUMN_GAMES_P3,
+                DbHelp.COLUMN_GAMES_P4,
+                DbHelp.COLUMN_GAMES_P5,
+                DbHelp.COLUMN_GAMES_P6
+                };
 
         Cursor cursor = database.query(
-                FeedReaderDbHelper.TABLE_GAMES,              // The table to query
+                DbHelp.TABLE_GAMES,              // The table to query
                 selectionName,                             // The columns to return
                 Selection,                                // The columns for the WHERE clause
                 selectionArgs,                            // The values for the WHERE clause
@@ -118,56 +113,50 @@ class WPTDataSource {
         );
 
         String[] value = {"","","","","",""};
-        while(cursor.moveToNext()) {
-            value[0] = cursor.getString(cursor.getColumnIndexOrThrow("p1_name"));
-            value[1] = cursor.getString(cursor.getColumnIndexOrThrow("p2_name"));
-            value[2] = cursor.getString(cursor.getColumnIndexOrThrow("p3_name"));
-            value[3] = cursor.getString(cursor.getColumnIndexOrThrow("p4_name"));
-            value[4] = cursor.getString(cursor.getColumnIndexOrThrow("p5_name"));
-            value[5] = cursor.getString(cursor.getColumnIndexOrThrow("p6_name"));
-        }
+        while(cursor.moveToNext())
+            for (int i=0; i<=5; i++)
+                value[i] = cursor.getString(cursor.getColumnIndexOrThrow(DbHelp.OPT_NAMES[0]));
+
         cursor.close();
         return value;
     }
 
-    Integer createGame (int anzplayer, String gameName,
+
+    int createGame (int anzplayer, String gameName,
                             String player1, String player2, String player3,
                             String player4, String player5, String player6) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put("AnzPlayer", anzplayer);
-        values.put("GameName", gameName);
-        values.put("p1_name", player1);
-        values.put("p2_name", player2);
-        values.put("p3_name", player3);
-        values.put("p4_name", player4);
-        values.put("p5_name", player5);
-        values.put("p6_name", player6);
+        String[] players = {player1,player2,player3,player4,player5,player6};
+        values.put(DbHelp.COLUMN_GAMES_ANZPLAYER, anzplayer);
+        values.put(DbHelp.COLUMN_GAMES_NAME, gameName);
+        for (int i=0; i<=5; i++)
+            values.put(DbHelp.OPT_NAMES[i], players[i]);
 
-        // Insert the new row, returning the primary key value of the new row
-        return (int) database.insert(FeedReaderDbHelper.TABLE_GAMES, null, values);
+        return (int) database.insert(DbHelp.TABLE_GAMES, null, values);
     }
 
     void deleteGame (Integer gameID) {
         String[] selectionArgs = { gameID.toString() };
 
         //Delete all Rounds
-        database.delete(FeedReaderDbHelper.TABLE_ROUNDS, "game_ID"
+        database.delete(DbHelp.TABLE_ROUNDS, DbHelp.COLUMN_GAMES_ID
                 + " = ?", selectionArgs);
 
         //Delte the game
-        database.delete(FeedReaderDbHelper.TABLE_GAMES, "ID"
+        database.delete(DbHelp.TABLE_GAMES, DbHelp.COLUMN_GAMES_ID
                 + " = ?", selectionArgs);
-
     }
 
     String[][] getGames() {
         //TODO: Check noch ungeprüft
-        String[] selectionName = {"ID", "AnzPlayer", "GameName"};
+        String[] selectionName = {DbHelp.COLUMN_GAMES_ID,
+                DbHelp.COLUMN_GAMES_ANZPLAYER,
+                DbHelp.COLUMN_GAMES_NAME};
 
         Cursor cursor = database.query(
-                FeedReaderDbHelper.TABLE_GAMES,   // The table to query
+                DbHelp.TABLE_GAMES,   // The table to query
                 selectionName,                    // The columns to return
                 null,                             // The columns for the WHERE clause
                 null,                             // The values for the WHERE clause
@@ -195,15 +184,16 @@ class WPTDataSource {
 
         String[] selectionArgs ={gameID.toString(), roundNr.toString()};
 
-        database.update("rounds", values,
-                "game_ID=? AND round_nr=?", selectionArgs);
+        database.update(DbHelp.TABLE_ROUNDS, values,
+                DbHelp.COLUMN_GAMES_ID+"=? AND "
+                        + DbHelp.COLUMN_ROUNDS_NR+"=?", selectionArgs);
     }
 
     void addRound (Integer gameID, Integer roundNr){
         ContentValues values = new ContentValues();
-        values.put("game_ID", gameID);
-        values.put("round_nr", roundNr);
+        values.put(DbHelp.COLUMN_GAMES_ID, gameID);
+        values.put(DbHelp.COLUMN_ROUNDS_NR, roundNr);
 
-        database.insert("rounds", null, values);
+        database.insert(DbHelp.TABLE_ROUNDS, null, values);
     }
 }

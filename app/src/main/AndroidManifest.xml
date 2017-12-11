@@ -32,7 +32,7 @@
         <activity
             android:name=".LoadGame"
             android:label="@string/b_loadgame"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

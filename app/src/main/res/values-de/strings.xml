@@ -17,7 +17,6 @@
     <string name="t_player">Anzahl Spieler</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="punkte">Punkte</string>
-    <string name="title_activity_settings">Einstellungen</string>
     <string name="gemacht">gemacht</string>
     <string name="Null">0</string>
 </resources>

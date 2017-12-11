@@ -18,8 +18,8 @@ import java.util.Locale;
 public class NewGame extends AppCompatActivity
         implements SelectPlayer.NoticeDialogListener {
 
-    private help h = new help();
-    private WPTDataSource db =new WPTDataSource(this);
+    private final help h = new help();
+    private final WPTDataSource db =new WPTDataSource(this);
     private Spinner spinner;
     private EditText p1;   private EditText p2;   private EditText p3;   private EditText p4;
     private EditText p5;   private EditText p6;   private EditText gn;
@@ -31,14 +31,14 @@ public class NewGame extends AppCompatActivity
         setContentView(R.layout.activity_new_game); //Setze Layout
 
         //Setze Views
-        spinner = (Spinner) findViewById(R.id.spinner);
-        p1 = (EditText) findViewById(R.id.player1);
-        p2 = (EditText) findViewById(R.id.player2);
-        p3 = (EditText) findViewById(R.id.player3);
-        p4 = (EditText) findViewById(R.id.player4);
-        p5 = (EditText) findViewById(R.id.player5);
-        p6 = (EditText) findViewById(R.id.player6);
-        gn = (EditText) findViewById(R.id.gameName);
+        spinner = findViewById(R.id.spinner);
+        p1 = findViewById(R.id.player1);
+        p2 = findViewById(R.id.player2);
+        p3 = findViewById(R.id.player3);
+        p4 = findViewById(R.id.player4);
+        p5 = findViewById(R.id.player5);
+        p6 = findViewById(R.id.player6);
+        gn = findViewById(R.id.gameName);
 
         //db = new WPTDataSource(this);
         db.open();
@@ -55,7 +55,7 @@ public class NewGame extends AppCompatActivity
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Spinner spinner = (Spinner) findViewById(R.id.spinner);
+                Spinner spinner = findViewById(R.id.spinner);
 
                 int anzplayer = Integer.parseInt(spinner.getSelectedItem().toString());
                 //l1 = sichtbar l2=versteckt
@@ -110,10 +110,10 @@ public class NewGame extends AppCompatActivity
         gn.setText(gamename);
 
         //Spielernamen laden
-        spinner.setSelection(h.getIndex(spinner,  db.getOpt("anzplayer")));
-        p1.setText(db.getOpt("playername1")); p2.setText(db.getOpt("playername2"));
-        p3.setText(db.getOpt("playername3")); p4.setText(db.getOpt("playername4"));
-        p5.setText(db.getOpt("playername5")); p6.setText(db.getOpt("playername6"));
+        spinner.setSelection(h.getIndex(spinner,  db.getOpt(DbHelp.OPT_ANZPLAYER)));
+        p1.setText(db.getOpt(DbHelp.OPT_NAME_P1)); p2.setText(db.getOpt(DbHelp.OPT_NAME_P2));
+        p3.setText(db.getOpt(DbHelp.OPT_NAME_P3)); p4.setText(db.getOpt(DbHelp.OPT_NAME_P4));
+        p5.setText(db.getOpt(DbHelp.OPT_NAME_P5)); p6.setText(db.getOpt(DbHelp.OPT_NAME_P6));
 
         //Datenbank schließen
         db.close();
@@ -166,13 +166,13 @@ public class NewGame extends AppCompatActivity
 
     public void saveSettings (){
         db.open();
-        db.createOption("anzplayer",spinner.getSelectedItem().toString());
-        db.createOption("playername1",p1.getText().toString());
-        db.createOption("playername2",p2.getText().toString());
-        db.createOption("playername3",p3.getText().toString());
-        db.createOption("playername4",p4.getText().toString());
-        db.createOption("playername5",p5.getText().toString());
-        db.createOption("playername6",p6.getText().toString());
+        db.setOption(DbHelp.OPT_ANZPLAYER,spinner.getSelectedItem().toString());
+        db.setOption(DbHelp.OPT_NAME_P1,p1.getText().toString());
+        db.setOption(DbHelp.OPT_NAME_P2,p2.getText().toString());
+        db.setOption(DbHelp.OPT_NAME_P3,p3.getText().toString());
+        db.setOption(DbHelp.OPT_NAME_P4,p4.getText().toString());
+        db.setOption(DbHelp.OPT_NAME_P5,p5.getText().toString());
+        db.setOption(DbHelp.OPT_NAME_P6,p6.getText().toString());
         db.close();
     }
 }
