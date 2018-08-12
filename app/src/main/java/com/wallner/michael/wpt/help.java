@@ -8,7 +8,7 @@ import android.widget.Spinner;
  *
  */
 
-class help {
+public class help {
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
@@ -16,7 +16,7 @@ class help {
     }
 
     //private method of your class
-    int getIndex(Spinner spinner, String myString)
+    public int getIndex(Spinner spinner, String myString)
     {
         int index = 0;
 
@@ -30,13 +30,13 @@ class help {
     }
 
     //TODO: Aktuell nur Standardschema abgebildet
-    Integer getPoints (Integer hip, Integer done){
+    public Integer getPoints (Integer hip, Integer done){
         if (hip > done)     return (done - hip)*10;
         if (hip < done)     return (hip - done)*10;
         return 20 + hip * 10;
     }
 
-    String int2string (Integer i) {
+    public String int2string (Integer i) {
         if (i == null)
             return "0";
 

@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.wallner.michael.wpt.db.DbHelp;
+import com.wallner.michael.wpt.db.WPTDataSource;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -31,6 +34,7 @@ public class NewGame extends AppCompatActivity
         setContentView(R.layout.activity_new_game); //Setze Layout
 
         //Setze Views
+
         spinner = findViewById(R.id.spinner);
         p1 = findViewById(R.id.player1);
         p2 = findViewById(R.id.player2);
@@ -151,7 +155,7 @@ public class NewGame extends AppCompatActivity
         toast.show();
         db.open();
         //Erstelle neues Spiel in der Datenbank
-        Integer GameID = db.createGame(Integer.parseInt(spinner.getSelectedItem().toString()),
+        int GameID = db.createGame(Integer.parseInt(spinner.getSelectedItem().toString()),
                 gn.getText().toString(),
                 p1.getText().toString(),p2.getText().toString(),
                 p3.getText().toString(),p4.getText().toString(),
