@@ -14,7 +14,12 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
 
+import butterknife.BindView;        //Butterknife
+import butterknife.ButterKnife;     //Butterknife
+
 import com.wallner.michael.wpt.db.WPTDataSource;
+import com.wallner.michael.wpt.fragments.SelectPlayer;
+
 import static com.wallner.michael.wpt.db.DbHelp.*;
 
 
@@ -24,30 +29,24 @@ public class NewGame extends AppCompatActivity
     private final GameRules h = new GameRules();
     private final WPTDataSource db =new WPTDataSource(this);
     private Spinner spinner;
-    private EditText p1;   private EditText p2;   private EditText p3;   private EditText p4;
-    private EditText p5;   private EditText p6;   private EditText gn;
+
+    @BindView(R.id.player1) EditText p1;
+    @BindView(R.id.player2) EditText p2;
+    @BindView(R.id.player3) EditText p3;
+    @BindView(R.id.player4) EditText p4;
+    @BindView(R.id.player5) EditText p5;
+    @BindView(R.id.player6) EditText p6;
+    @BindView(R.id.gameName) EditText gn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game); //Setze Layout
-
-        //Setze Views
-
+        ButterKnife.bind(this);             //Butterknife
         spinner = findViewById(R.id.spinner);
-        p1 = findViewById(R.id.player1);
-        p2 = findViewById(R.id.player2);
-        p3 = findViewById(R.id.player3);
-        p4 = findViewById(R.id.player4);
-        p5 = findViewById(R.id.player5);
-        p6 = findViewById(R.id.player6);
-        gn = findViewById(R.id.gameName);
-
-        //db = new WPTDataSource(this);
         db.open();
 
-        //ArrayAdapter für Spinner Anzahl Spieler siehe String.xml anzplayer
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.anz_players, android.R.layout.simple_spinner_item);
 

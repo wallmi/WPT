@@ -19,15 +19,6 @@
             tools:layout_editor_absoluteX="0dp">
 
                 <Button
-                    android:id="@+id/button4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="loadGame"
-                    android:text="@string/b_loadgame"
-                    app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-                <Button
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,6 +27,15 @@
                     android:onClick="startNewGame"
                     android:text="@string/b_newgame"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="loadGame"
+                    android:text="@string/b_loadgame"
+                    app:layout_constraintTop_toBottomOf="@+id/button5" />
         </LinearLayout>
 
         <ImageView

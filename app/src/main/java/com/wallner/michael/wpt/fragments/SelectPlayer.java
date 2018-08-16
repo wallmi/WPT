@@ -1,4 +1,4 @@
-package com.wallner.michael.wpt;
+package com.wallner.michael.wpt.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,14 +7,15 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.wallner.michael.wpt.R;
 
 public class SelectPlayer extends DialogFragment {
 
-    interface NoticeDialogListener {
+    public interface NoticeDialogListener {
         void onClickPlayer(DialogFragment dialog, String selectedPlayer);
     }
 
-    private NoticeDialogListener mListener;
+    public NoticeDialogListener mListener;
     private String[] playerlist;
 
     @Override
@@ -35,7 +36,6 @@ public class SelectPlayer extends DialogFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
             mListener = (NoticeDialogListener) activity;
