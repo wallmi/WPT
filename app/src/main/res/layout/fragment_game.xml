@@ -90,7 +90,8 @@
             android:id="@+id/p1_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,7 +139,8 @@
             android:id="@+id/p2_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,7 +188,8 @@
             android:id="@+id/p3_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,7 +237,8 @@
             android:id="@+id/p4_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -282,7 +286,8 @@
             android:id="@+id/p5_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -330,7 +335,8 @@
             android:id="@+id/p6_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online" />
+            android:src="@android:drawable/presence_online"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"

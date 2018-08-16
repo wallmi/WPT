@@ -301,4 +301,23 @@ public class WPTDataSource extends DbHelp{
 
     }
 
+    public int firstGiver (Integer gameID){
+
+        String[] selectionArgs = {gameID.toString()};
+        String[] selectionName = {COLUMN_GAMES_GIVER};
+        String Selection = COLUMN_GAMES_ID + "=?";
+
+        Cursor c = exSQL(TABLE_GAMES, Selection, selectionArgs, selectionName);
+
+        if (c == null)
+            return -1;
+
+        int value = -1;
+        while (c.moveToNext()) {
+            value = c.getInt(c.getColumnIndexOrThrow(COLUMN_GAMES_GIVER));
+        }
+        c.close();
+        return value;
+    }
+
 }

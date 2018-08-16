@@ -158,6 +158,17 @@ public class RoundFragment extends Fragment
         for(int i=0; i<Seekbars.length; i++)
             Seekbars[i].setProgress(values[i]);
 
+        //Ermittlung des Gebers in der Rund
+        //GEBER = ((round -1) % anzp + 1 + (giver - 1)
+        switch (((round -1 + db.firstGiver(gameID) - 1) % anzp) + 1) {
+            case 1: p1_dealer.setVisibility(View.VISIBLE); break;
+            case 2: p2_dealer.setVisibility(View.VISIBLE); break;
+            case 3: p3_dealer.setVisibility(View.VISIBLE); break;
+            case 4: p4_dealer.setVisibility(View.VISIBLE); break;
+            case 5: p5_dealer.setVisibility(View.VISIBLE); break;
+            case 6: p6_dealer.setVisibility(View.VISIBLE); break;
+        }
+
         /*
          *  Button für nächste Runde
          */

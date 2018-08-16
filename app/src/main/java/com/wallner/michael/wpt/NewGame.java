@@ -161,7 +161,7 @@ public class NewGame extends AppCompatActivity
 
         int giver = 0;
 
-        for (int i = 0;i <= playernames.length;i++){
+        for (int i = 0;i < playernames.length;i++){
             if (playernames[i].equals(selectedplayer))
                 giver = i +1;
         }
