@@ -114,13 +114,15 @@ public class WPTDataSource extends DbHelp{
 
     public int createGame (int anzplayer, String gameName,
                             String player1, String player2, String player3,
-                            String player4, String player5, String player6) {
+                            String player4, String player5, String player6,
+                           int giver) {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         String[] players = {player1, player2, player3, player4, player5, player6};
         values.put(COLUMN_GAMES_ANZPLAYER, anzplayer);
         values.put(COLUMN_GAMES_NAME, gameName);
+        values.put(COLUMN_GAMES_GIVER,giver);
         for (int i=0; i<=5; i++)
             values.put(OPT_NAMES[i], players[i]);
 

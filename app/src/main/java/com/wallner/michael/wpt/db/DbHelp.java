@@ -7,6 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+import javax.xml.datatype.Duration;
+
 
 /**
  * Created by Michael on 08.04.2017 for WPT
@@ -18,10 +25,12 @@ public class DbHelp extends SQLiteOpenHelper {
     public Context ct;
 
     //Version der Datenbank
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
+    //Version 2: Added TABLE Games Giver
 
     //Datenbankname am Filesystem
     private static final String DATABASE_NAME = "WPT.db";
+    static final String DATABASE_PATH = "/data/data/com.wallner.michael.wpt/databases/";
 
     //Table Options
     public static final String TABLE_OPT = "options";
@@ -52,6 +61,8 @@ public class DbHelp extends SQLiteOpenHelper {
     public static final String COLUMN_GAMES_P4 = OPT_NAME_P4;
     public static final String COLUMN_GAMES_P5 = OPT_NAME_P5;
     public static final String COLUMN_GAMES_P6 = OPT_NAME_P6;
+    public static final String COLUMN_GAMES_GIVER = "Giver";
+
 
     //Table rounds
     public static final String TABLE_ROUNDS = "rounds";
@@ -91,7 +102,9 @@ public class DbHelp extends SQLiteOpenHelper {
         + COLUMN_GAMES_P3 + " TEXT, "
         + COLUMN_GAMES_P4 + " TEXT, "
         + COLUMN_GAMES_P5 + " TEXT, "
-        + COLUMN_GAMES_P6 + " TEXT);";
+        + COLUMN_GAMES_P6 + " TEXT, "
+        + COLUMN_GAMES_GIVER + " INTEGER "
+            + ");";
 
     private static final String SQL_ROUNDS_TABLE_CREATE = "CREATE TABLE "
         + TABLE_ROUNDS + " ("
@@ -113,6 +126,18 @@ public class DbHelp extends SQLiteOpenHelper {
         + "PRIMARY KEY(" + COLUMN_GAMES_ID + "," + COLUMN_ROUNDS_NR + ") "
         +   ");";
 
+    private static final String SQL_UPGRADE_TO_VERSION_2 =
+            "ALTER TABLE "
+            + TABLE_GAMES + " "
+            + "ADD " + COLUMN_GAMES_GIVER + " INTEGER"
+            + ";";
+
+    private static final String SQL_UPGRADE_TO_VERSION_2_DATA =
+            "UPDATE " + TABLE_GAMES + " "
+            + "SET  " + COLUMN_GAMES_GIVER + " = 1 "
+            + "WHERE " + COLUMN_GAMES_GIVER + " IS NULL"
+            + ";";
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
@@ -127,25 +152,25 @@ public class DbHelp extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try{
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPT);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GAMES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ROUNDS);
+            backupdbFile(oldVersion);
+            if (oldVersion < 2) {
+                db.execSQL(SQL_UPGRADE_TO_VERSION_2);
+                db.execSQL(SQL_UPGRADE_TO_VERSION_2_DATA);
+            }
         } catch (Exception ex) {
             err_message(ex);
         }
-        onCreate(db);
     }
+
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-
     public void open() throws SQLException {
         database = getWritableDatabase();
     }
-
 
     public Cursor exSQL (String Table, String Selection, String[] selectionArgs, String [] columsRet){
         try{
@@ -169,6 +194,31 @@ public class DbHelp extends SQLiteOpenHelper {
         Toast.makeText(ct,"SQL Error: " + ex.getMessage(),Toast.LENGTH_LONG).show();
     }
 
+    private void backupdbFile (Integer oldVersion){
+        try {
+
+            File dbFile = new File(DATABASE_PATH + DATABASE_NAME);
+            FileInputStream fis = new FileInputStream(dbFile);
+
+            String outFileName = DATABASE_PATH + DATABASE_NAME + "_" + oldVersion.toString();
+
+            OutputStream output = new FileOutputStream(outFileName);
+
+            // Transfer bytes from the inputfile to the outputfile
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+
+            // Close the streams
+            output.flush();
+            output.close();
+            fis.close();
+        }catch (Exception ex) {
+            err_message(ex);
+        }
+    }
 }
 
 

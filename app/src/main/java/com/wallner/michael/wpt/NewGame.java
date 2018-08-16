@@ -153,13 +153,27 @@ public class NewGame extends AppCompatActivity
                 selectedplayer,
                 Toast.LENGTH_LONG);
         toast.show();
+
+        String playernames[] = {
+                p1.getText().toString(),p2.getText().toString(),p3.getText().toString(),
+                p4.getText().toString(),p5.getText().toString(),p6.getText().toString()
+        };
+
+        int giver = 0;
+
+        for (int i = 0;i <= playernames.length;i++){
+            if (playernames[i].equals(selectedplayer))
+                giver = i +1;
+        }
+
         db.open();
         //Erstelle neues Spiel in der Datenbank
         int GameID = db.createGame(Integer.parseInt(spinner.getSelectedItem().toString()),
                 gn.getText().toString(),
                 p1.getText().toString(),p2.getText().toString(),
                 p3.getText().toString(),p4.getText().toString(),
-                p5.getText().toString(),p6.getText().toString());
+                p5.getText().toString(),p6.getText().toString(),
+                giver);
 
         Intent intent = new Intent(this, Game.class);
         //GameID übergeben
