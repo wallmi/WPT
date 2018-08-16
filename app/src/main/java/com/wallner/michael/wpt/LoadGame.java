@@ -41,20 +41,10 @@ public class LoadGame extends AppCompatActivity {
 
         // ListView Item Click Listener
         lv_games.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                // ListView Clicked item value
-                String itemValue = (String) lv_games.getItemAtPosition(position);
                 Integer gameID = Integer.parseInt(games[position][0]);
-
-                // Show Alert
-                //Toast.makeText(getApplicationContext(),
-                //        "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                //      .show();
-
                 loadGame(gameID);
             }
         });
@@ -84,7 +74,7 @@ public class LoadGame extends AppCompatActivity {
         });
     }
     //Starten des Dialoges SelectPlayer
-    public void loadGame (Integer gameID) {
+    private void loadGame (Integer gameID) {
 
         WPTDataSource db = new WPTDataSource(getBaseContext());
         Intent intent = new Intent(this, Game.class);
@@ -98,7 +88,7 @@ public class LoadGame extends AppCompatActivity {
 
     }
 
-    public void deleteGame(Integer gameID){
+    private void deleteGame(Integer gameID){
         WPTDataSource db = new WPTDataSource(this);
         db.open();
         db.deleteGame(gameID);

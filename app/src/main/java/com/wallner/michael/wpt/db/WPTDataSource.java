@@ -54,26 +54,31 @@ public class WPTDataSource extends DbHelp{
     }
 
     public Integer getAnzPlayerbyGameID(Integer gameID) {
-        String Selection = COLUMN_GAMES_ID + "= ?";
-        String[] selectionArgs = { gameID.toString() };
-        String[] selectionName = { COLUMN_GAMES_ANZPLAYER};
+        try {
+            String Selection = COLUMN_GAMES_ID + "= ?";
+            String[] selectionArgs = {gameID.toString()};
+            String[] selectionName = {COLUMN_GAMES_ANZPLAYER};
 
-        Cursor cursor = database.query(
-                TABLE_GAMES,              // The table to query
-                selectionName,                             // The columns to return
-                Selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
-        );
+            Cursor cursor = database.query(
+                    TABLE_GAMES,              // The table to query
+                    selectionName,                             // The columns to return
+                    Selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                                     // don't group the rows
+                    null,                                     // don't filter by row groups
+                    null                                 // The sort order
+            );
 
-        String value = "";
-        while(cursor.moveToNext()) {
-            value = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GAMES_ANZPLAYER));
+            String value = "";
+            while (cursor.moveToNext()) {
+                value = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GAMES_ANZPLAYER));
+            }
+            cursor.close();
+            return Integer.parseInt(value);
+        } catch (Exception ex){
+            err_message(ex);
+            return 0;
         }
-        cursor.close();
-        return Integer.parseInt(value);
     }
 
     public String[] getPlayerNamesbyGameID (Integer gameID) {

@@ -39,7 +39,8 @@ public class Game extends AppCompatActivity {
         db.open();
 
         //TODO: getInt NullPointerExeption
-        final int gameID = getIntent().getExtras().getInt("GameID");
+
+        final int gameID = getIntent().getExtras().getInt("GameID",-1);
 
         setTitle(getIntent().getExtras().getString("GameName"));
 

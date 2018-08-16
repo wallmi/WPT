@@ -14,8 +14,8 @@ public class SelectPlayer extends DialogFragment {
         void onClickPlayer(DialogFragment dialog, String selectedPlayer);
     }
 
-    NoticeDialogListener mListener;
-    String[] playerlist;
+    private NoticeDialogListener mListener;
+    private String[] playerlist;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -170,7 +170,7 @@ public class NewGame extends AppCompatActivity
         startActivity(intent);
 }
 
-    public void saveSettings (){
+    private void saveSettings (){
         db.open();
         db.setOption(OPT_ANZPLAYER,spinner.getSelectedItem().toString());
         db.setOption(OPT_NAME_P1,p1.getText().toString());

@@ -146,17 +146,10 @@ public class DbHelp extends SQLiteOpenHelper {
         database = getWritableDatabase();
     }
 
-    /**
-     *
-     * @param Table Name der Tabel
-     * @param Selection
-     * @param selectionArgs
-     * @param columsRet
-     * @return
-     */
+
     public Cursor exSQL (String Table, String Selection, String[] selectionArgs, String [] columsRet){
         try{
-            Cursor cursor = database.query(
+            return database.query(
                     Table,              // The table to query
                     columsRet,                           // The columns to return
                     Selection,                                // The columns for the WHERE clause
@@ -165,7 +158,7 @@ public class DbHelp extends SQLiteOpenHelper {
                     null,                                     // don't filter by row groups
                     null                                 // The sort order
             );
-            return cursor;
+
         } catch (Exception ex) {
             err_message(ex);
             return null;

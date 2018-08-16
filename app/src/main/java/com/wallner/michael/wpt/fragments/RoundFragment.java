@@ -1,6 +1,5 @@
 package com.wallner.michael.wpt.fragments;
 
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -234,12 +233,6 @@ public class RoundFragment extends Fragment
       db.close();
     }
 
-    /**
-     * Beim ändern einer Seekbar werden die Werte in die Datenbank geschrieben
-     * @param p
-     * @param progress
-     * @param fromUser
-     */
     @Override
     public void onProgressChanged(SeekBar p, int progress,boolean fromUser) {
         GameRules h = new GameRules();

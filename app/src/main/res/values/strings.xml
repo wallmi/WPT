@@ -21,13 +21,13 @@
 
     <string name="gemacht">total made</string>
     <string name="angesagt">total hip</string>
-    <string name="name">name</string>
     <string name="copyright" translatable="false">(C) Michael Wallner</string>
     <string name="version" translatable="false">Version 0.1 beta</string>
     <string name="player_1">Player 1</string>
     <string name="dummy1" translatable="false">Dummy1</string>
     <string name="punkte">points</string>
-    <string name="Null">0</string>
     <string name="game">Game</string>
     <string name="del_game">press long to delete</string>
+    <string name="super_cooles_bild_fehlt" translatable="false">Super cooles Bild fehlt</string>
+    <string name="default_points" translatable="false">20</string>
 </resources>

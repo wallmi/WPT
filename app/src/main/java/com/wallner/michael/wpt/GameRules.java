@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import com.wallner.michael.wpt.db.WPTDataSource;
 
+import java.util.Locale;
+
 /**
  * Created by Michael on 08.04.2017 for WPT
  *
@@ -44,8 +46,7 @@ public class GameRules {
         if (i == null)
             return "0";
 
-        return String.format( "%d", i);
-        //TODO: Localisation
+        return  String.format(Locale.getDefault(),"%d",i);
     }
 
     static public boolean roundOK(Context context, int gameID, int round) {
