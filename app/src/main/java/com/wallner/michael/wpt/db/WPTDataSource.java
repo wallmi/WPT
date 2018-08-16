@@ -6,9 +6,6 @@ import android.database.Cursor;
 
 public class WPTDataSource extends DbHelp{
 
-
-    private Context ct;
-
     public WPTDataSource(Context context) {
         super (context);
         ct = context;
@@ -103,7 +100,7 @@ public class WPTDataSource extends DbHelp{
         String[] value = {"","","","","",""};
         while(cursor.moveToNext())
             for (int i=0; i<=5; i++)
-                value[i] = cursor.getString(cursor.getColumnIndexOrThrow(OPT_NAMES[0]));
+                value[i] = cursor.getString(cursor.getColumnIndexOrThrow(OPT_NAMES[i]));
 
         cursor.close();
         return value;
@@ -165,6 +162,32 @@ public class WPTDataSource extends DbHelp{
         return Games;
     }
 
+
+    public String getGameName(Integer gameID) {
+        String[] selectionName = {
+                COLUMN_GAMES_NAME
+                };
+
+        String Selection = COLUMN_GAMES_ID + "=?";
+        String[]  SelectionArgs = {gameID.toString()};
+
+        Cursor cursor = database.query(
+                TABLE_GAMES,   // The table to query
+                selectionName,                    // The columns to return
+                Selection,                             // The columns for the WHERE clause
+                SelectionArgs,                             // The values for the WHERE clause
+                null,                             // don't group the rows
+                null,                             // don't filter by row groups
+                null                              // The sort order
+        );
+        String ret= "";
+        while (cursor.moveToNext()) {
+            ret = cursor.getString(0);
+        }
+        cursor.close();
+        return ret;
+    }
+
     public void setPoints (Integer gameID, Integer roundNr, String field, int value) {
 
         ContentValues values = new ContentValues();
@@ -178,61 +201,77 @@ public class WPTDataSource extends DbHelp{
     }
 
     public void addRound (Integer gameID, Integer roundNr){
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_GAMES_ID, gameID);
-        values.put(COLUMN_ROUNDS_NR, roundNr);
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_GAMES_ID, gameID);
+            values.put(COLUMN_ROUNDS_NR, roundNr);
 
-        database.insert(TABLE_ROUNDS, null, values);
+            database.insert(TABLE_ROUNDS, null, values);
+        }
+        catch (Exception ex){
+            err_message(ex);
+        }
     }
 
     public void finishRound (Integer gameID, Integer roundNr){
 
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_ROUNDS_FINISHED, 1);
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_ROUNDS_FINISHED, 1);
 
-        String[] selectionArgs ={gameID.toString(), roundNr.toString()};
+            String[] selectionArgs = {gameID.toString(), roundNr.toString()};
 
-        database.update(TABLE_ROUNDS, values,
-                COLUMN_GAMES_ID+"=? AND "
-                        + COLUMN_ROUNDS_NR+"=?", selectionArgs);
+            database.update(TABLE_ROUNDS, values,
+                    COLUMN_GAMES_ID + "=? AND "
+                            + COLUMN_ROUNDS_NR + "=?", selectionArgs);
+        } catch (Exception ex){
+            err_message(ex);
+        }
     }
 
     public int[] getRoundPoints (Integer gameID, Integer roundNr) {
-        String Selection = COLUMN_GAMES_ID+"=? AND " + COLUMN_ROUNDS_NR+"=?";
-        String[] selectionArgs = { gameID.toString(), roundNr.toString() };
-        String[] selectionName = { COLUMN_ROUNDS_P1_DONE ,
-                COLUMN_ROUNDS_P2_DONE,
-                COLUMN_ROUNDS_P3_DONE,
-                COLUMN_ROUNDS_P4_DONE,
-                COLUMN_ROUNDS_P5_DONE,
-                COLUMN_ROUNDS_P6_DONE,
-                COLUMN_ROUNDS_P1_HIP ,
-                COLUMN_ROUNDS_P2_HIP,
-                COLUMN_ROUNDS_P3_HIP,
-                COLUMN_ROUNDS_P4_HIP,
-                COLUMN_ROUNDS_P5_HIP,
-                COLUMN_ROUNDS_P6_HIP
-        };
 
-        Cursor cursor = database.query(
-                TABLE_ROUNDS,              // The table to query
-                selectionName,                             // The columns to return
-                Selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
-        );
+        try {
+            String Selection = COLUMN_GAMES_ID + "=? AND " + COLUMN_ROUNDS_NR + "=?";
+            String[] selectionArgs = {gameID.toString(), roundNr.toString()};
+            String[] selectionName = {
+                    COLUMN_ROUNDS_P1_HIP,
+                    COLUMN_ROUNDS_P2_HIP,
+                    COLUMN_ROUNDS_P3_HIP,
+                    COLUMN_ROUNDS_P4_HIP,
+                    COLUMN_ROUNDS_P5_HIP,
+                    COLUMN_ROUNDS_P6_HIP,
+                    COLUMN_ROUNDS_P1_DONE,
+                    COLUMN_ROUNDS_P2_DONE,
+                    COLUMN_ROUNDS_P3_DONE,
+                    COLUMN_ROUNDS_P4_DONE,
+                    COLUMN_ROUNDS_P5_DONE,
+                    COLUMN_ROUNDS_P6_DONE,
+            };
 
-        int[] value = new int[selectionName.length];
-        while(cursor.moveToNext())
-            for (int i=0; i<=5; i++)
-                value[i] = Integer.valueOf(
-                        cursor.getString(
-                                cursor.getColumnIndexOrThrow(selectionName[i])));
+            Cursor cursor = database.query(
+                    TABLE_ROUNDS,              // The table to query
+                    selectionName,                             // The columns to return
+                    Selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                                     // don't group the rows
+                    null,                                     // don't filter by row groups
+                    null                                 // The sort order
+            );
 
-        cursor.close();
-        return value;
+            int[] value = new int[selectionName.length];
+            while (cursor.moveToNext())
+                for (int i = 0; i <= 11; i++)
+                    value[i] = Integer.valueOf(
+                            cursor.getString(
+                                    cursor.getColumnIndexOrThrow(selectionName[i])));
+
+            cursor.close();
+            return value;
+        } catch (Exception ex) {
+            err_message(ex);
+        }
+        return new int[0];
     }
 
     public Boolean isRoundFinished(Integer gameID, Integer roundNr){
@@ -251,10 +290,8 @@ public class WPTDataSource extends DbHelp{
             value = c.getString(c.getColumnIndexOrThrow(COLUMN_ROUNDS_FINISHED));
         }
         c.close();
-        if (value == "1")
-            return true;
+        return value.equals("1");
 
-        return false;
     }
 
 }

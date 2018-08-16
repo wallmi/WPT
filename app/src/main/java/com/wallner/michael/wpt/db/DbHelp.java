@@ -15,18 +15,18 @@ import android.widget.Toast;
 
 public class DbHelp extends SQLiteOpenHelper {
     SQLiteDatabase database;
-    private Context ct;
+    public Context ct;
 
-    // If you change the database schema, you must increment the database version.
+    //Version der Datenbank
     private static final int DATABASE_VERSION = 1;
 
-    //Database
+    //Datenbankname am Filesystem
     private static final String DATABASE_NAME = "WPT.db";
 
     //Table Options
-    static final String TABLE_OPT = "options";
-    static final String COLUMN_OPT_OPT = "option";
-    static final String COLUMN_OPT_VAL = "value";
+    public static final String TABLE_OPT = "options";
+    public static final String COLUMN_OPT_OPT = "option";
+    public static final String COLUMN_OPT_VAL = "value";
 
     //Optionen
     public static final String OPT_ANZPLAYER = "anzplayer";
@@ -58,7 +58,7 @@ public class DbHelp extends SQLiteOpenHelper {
     public static final String COLUMN_ROUNDS_NR = "round_nr";
     public static final String COLUMN_ROUNDS_P1_HIP = "p1_hip";
     public static final String COLUMN_ROUNDS_P2_HIP = "p2_hip";
-    public  static final String COLUMN_ROUNDS_P3_HIP = "p3_hip";
+    public static final String COLUMN_ROUNDS_P3_HIP = "p3_hip";
     public static final String COLUMN_ROUNDS_P4_HIP = "p4_hip";
     public static final String COLUMN_ROUNDS_P5_HIP = "p5_hip";
     public static final String COLUMN_ROUNDS_P6_HIP = "p6_hip";
@@ -75,6 +75,7 @@ public class DbHelp extends SQLiteOpenHelper {
         ct = context;
     }
 
+    //String zum erzeugen der Tabellen
     private static final String SQL_OPT_TABLE_CREATE = "CREATE TABLE "
         + TABLE_OPT + "( " + COLUMN_OPT_OPT
         + " text PRIMARY KEY , " + COLUMN_OPT_VAL
@@ -114,17 +115,24 @@ public class DbHelp extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_OPT_TABLE_CREATE);
-        db.execSQL(SQL_GAMES_TABLE_CREATE);
-        db.execSQL(SQL_ROUNDS_TABLE_CREATE);
+        try{
+            db.execSQL(SQL_OPT_TABLE_CREATE);
+            db.execSQL(SQL_GAMES_TABLE_CREATE);
+            db.execSQL(SQL_ROUNDS_TABLE_CREATE);
+        } catch (Exception ex) {
+            err_message(ex);
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        try{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GAMES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ROUNDS);
+        } catch (Exception ex) {
+            err_message(ex);
+        }
         onCreate(db);
     }
 
@@ -133,11 +141,19 @@ public class DbHelp extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
+
     public void open() throws SQLException {
         database = getWritableDatabase();
     }
 
-
+    /**
+     *
+     * @param Table Name der Tabel
+     * @param Selection
+     * @param selectionArgs
+     * @param columsRet
+     * @return
+     */
     public Cursor exSQL (String Table, String Selection, String[] selectionArgs, String [] columsRet){
         try{
             Cursor cursor = database.query(
@@ -156,7 +172,7 @@ public class DbHelp extends SQLiteOpenHelper {
         }
     }
 
-    private void err_message (Exception ex){
+    public void err_message (Exception ex){
         Toast.makeText(ct,"SQL Error: " + ex.getMessage(),Toast.LENGTH_LONG).show();
     }
 

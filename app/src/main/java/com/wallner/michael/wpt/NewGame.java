@@ -11,17 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.wallner.michael.wpt.db.DbHelp;
-import com.wallner.michael.wpt.db.WPTDataSource;
-
 import java.util.Calendar;
 import java.util.Locale;
+
+import com.wallner.michael.wpt.db.WPTDataSource;
+import static com.wallner.michael.wpt.db.DbHelp.*;
 
 
 public class NewGame extends AppCompatActivity
         implements SelectPlayer.NoticeDialogListener {
 
-    private final help h = new help();
+    private final GameRules h = new GameRules();
     private final WPTDataSource db =new WPTDataSource(this);
     private Spinner spinner;
     private EditText p1;   private EditText p2;   private EditText p3;   private EditText p4;
@@ -114,10 +114,10 @@ public class NewGame extends AppCompatActivity
         gn.setText(gamename);
 
         //Spielernamen laden
-        spinner.setSelection(h.getIndex(spinner,  db.getOpt(DbHelp.OPT_ANZPLAYER)));
-        p1.setText(db.getOpt(DbHelp.OPT_NAME_P1)); p2.setText(db.getOpt(DbHelp.OPT_NAME_P2));
-        p3.setText(db.getOpt(DbHelp.OPT_NAME_P3)); p4.setText(db.getOpt(DbHelp.OPT_NAME_P4));
-        p5.setText(db.getOpt(DbHelp.OPT_NAME_P5)); p6.setText(db.getOpt(DbHelp.OPT_NAME_P6));
+        spinner.setSelection(h.getIndex(spinner,  db.getOpt(OPT_ANZPLAYER)));
+        p1.setText(db.getOpt(OPT_NAME_P1)); p2.setText(db.getOpt(OPT_NAME_P2));
+        p3.setText(db.getOpt(OPT_NAME_P3)); p4.setText(db.getOpt(OPT_NAME_P4));
+        p5.setText(db.getOpt(OPT_NAME_P5)); p6.setText(db.getOpt(OPT_NAME_P6));
 
         //Datenbank schließen
         db.close();
@@ -160,23 +160,25 @@ public class NewGame extends AppCompatActivity
                 p1.getText().toString(),p2.getText().toString(),
                 p3.getText().toString(),p4.getText().toString(),
                 p5.getText().toString(),p6.getText().toString());
-        db.close();
+
         Intent intent = new Intent(this, Game.class);
         //GameID übergeben
         intent.putExtra("GameID",GameID);
+        intent.putExtra("GameName", db.getGameName(GameID));
         //Starte Activity Spiel
+        db.close();
         startActivity(intent);
-    }
+}
 
     public void saveSettings (){
         db.open();
-        db.setOption(DbHelp.OPT_ANZPLAYER,spinner.getSelectedItem().toString());
-        db.setOption(DbHelp.OPT_NAME_P1,p1.getText().toString());
-        db.setOption(DbHelp.OPT_NAME_P2,p2.getText().toString());
-        db.setOption(DbHelp.OPT_NAME_P3,p3.getText().toString());
-        db.setOption(DbHelp.OPT_NAME_P4,p4.getText().toString());
-        db.setOption(DbHelp.OPT_NAME_P5,p5.getText().toString());
-        db.setOption(DbHelp.OPT_NAME_P6,p6.getText().toString());
+        db.setOption(OPT_ANZPLAYER,spinner.getSelectedItem().toString());
+        db.setOption(OPT_NAME_P1,p1.getText().toString());
+        db.setOption(OPT_NAME_P2,p2.getText().toString());
+        db.setOption(OPT_NAME_P3,p3.getText().toString());
+        db.setOption(OPT_NAME_P4,p4.getText().toString());
+        db.setOption(OPT_NAME_P5,p5.getText().toString());
+        db.setOption(OPT_NAME_P6,p6.getText().toString());
         db.close();
     }
 }

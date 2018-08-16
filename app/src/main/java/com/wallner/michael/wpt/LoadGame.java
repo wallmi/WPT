@@ -51,9 +51,9 @@ public class LoadGame extends AppCompatActivity {
                 Integer gameID = Integer.parseInt(games[position][0]);
 
                 // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
+                //Toast.makeText(getApplicationContext(),
+                //        "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                //      .show();
 
                 loadGame(gameID);
             }
@@ -66,7 +66,17 @@ public class LoadGame extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                                 int position, long id) {
                 Integer gameID = Integer.parseInt(games[position][0]);
+                WPTDataSource db = new WPTDataSource(getBaseContext());
+                db.open();
+
+                String gameName = db.getGameName(gameID);
+
                 deleteGame(gameID);
+
+                Toast.makeText(getBaseContext(),"Spiel " + gameName + " wurde gelöscht",
+                        Toast.LENGTH_LONG).show();
+
+                db.close();
                 finish();
                 startActivity(getIntent());
                 return true;
@@ -76,11 +86,16 @@ public class LoadGame extends AppCompatActivity {
     //Starten des Dialoges SelectPlayer
     public void loadGame (Integer gameID) {
 
+        WPTDataSource db = new WPTDataSource(getBaseContext());
         Intent intent = new Intent(this, Game.class);
-        //GameID übergeben
+        db.open();
+
         intent.putExtra("GameID",gameID);
-        //Starte Activity Spiel
+        intent.putExtra("GameName", db.getGameName(gameID));
+        db.close();
+
         startActivity(intent);
+
     }
 
     public void deleteGame(Integer gameID){

@@ -14,10 +14,11 @@
     <string name="t_player">Number Players</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="punkte">points</string>
-    <string name="angesagt">hip</string>
+    <string name="angesagt">total hip</string>
     <string name="erster_geber">First giver</string>
     <string name="name">name</string>
-    <string name="gemacht">made</string>
+    <string name="gemacht">total made</string>
     <string name="Null">0</string>
     <string name="game">Game</string>
+    <string name="del_game">press long to delete</string>
 </resources>

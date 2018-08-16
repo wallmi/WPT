@@ -3,7 +3,7 @@
     <string name="app_name">Wizard Punkte</string>
     <string name="StartGame">Starte Spiel</string>
     <string name="action_settings">Einstellung</string>
-    <string name="angesagt">angesagt</string>
+    <string name="angesagt">Gesamt angesagt</string>
     <string name="b_loadgame">Lade Spiel</string>
     <string name="b_newgame">Neues Spiel</string>
     <string name="erster_geber">Erster Geber</string>
@@ -17,7 +17,8 @@
     <string name="t_player">Anzahl Spieler</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="punkte">Punkte</string>
-    <string name="gemacht">gemacht</string>
+    <string name="gemacht">Gesamt gemacht</string>
     <string name="Null">0</string>
     <string name="game">Spiel</string>
+    <string name="del_game">Lange drücken um zu löschen</string>
 </resources>

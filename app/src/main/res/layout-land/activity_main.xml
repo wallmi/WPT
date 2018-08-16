@@ -4,18 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
+
     tools:context="com.wallner.michael.wpt.MainActivity"
     tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="loadGame"
+                    android:text="@string/b_loadgame"
+                    app:layout_constraintTop_toBottomOf="@+id/button5" />
 
                 <Button
                     android:id="@+id/button5"
@@ -26,15 +36,6 @@
                     android:onClick="startNewGame"
                     android:text="@string/b_newgame"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="loadGame"
-                    android:text="@string/b_loadgame"
-                    app:layout_constraintTop_toBottomOf="@+id/button5" />
         </LinearLayout>
 
         <ImageView
@@ -45,7 +46,8 @@
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+            app:layout_constraintVertical_bias="0.507"
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
@@ -82,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/version"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent" />

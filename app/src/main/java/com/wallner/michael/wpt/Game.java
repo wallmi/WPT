@@ -1,8 +1,6 @@
 package com.wallner.michael.wpt;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +16,9 @@ import android.content.Context;
 import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.content.res.Resources.Theme;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
 
 import com.wallner.michael.wpt.fragments.RoundFragment;
 import com.wallner.michael.wpt.db.WPTDataSource;
@@ -26,7 +27,6 @@ import static com.wallner.michael.wpt.R.id.container;
 
 
 public class Game extends AppCompatActivity {
-
 
     @Override
     //Game erstellen
@@ -39,7 +39,9 @@ public class Game extends AppCompatActivity {
         db.open();
 
         //TODO: getInt NullPointerExeption
-        final int gameID = this.getIntent().getExtras().getInt("GameID");
+        final int gameID = getIntent().getExtras().getInt("GameID");
+
+        setTitle(getIntent().getExtras().getString("GameName"));
 
         int anzplayer = db.getAnzPlayerbyGameID(gameID);
         int rounds = 0;
@@ -50,10 +52,7 @@ public class Game extends AppCompatActivity {
             case 5: rounds = 12; break;
             case 4: rounds = 15; break;
             case 3: rounds = 20; break;
-            //default:
-            //    System.out.println("Invalid number of players!");
-            //    break;
-        }
+         }
 
         String tabs[] = new String[rounds];
         for (int i=1; i <=rounds; i++)
@@ -71,35 +70,12 @@ public class Game extends AppCompatActivity {
                 // container view.
                 getSupportFragmentManager().beginTransaction()
                         .replace(container, RoundFragment
-                                .newInstance(round + 1,gameID))
+                                .newInstance(round + 1 ,gameID))
                         .commit();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        //TextView status = (TextView) findViewById(R.id.status);
-        //status.setText("Test");
-
-        //Action Item
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Long round = spinner.getSelectedItemId();
-
-                Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                WPTDataSource db = new WPTDataSource(getBaseContext());
-                db.open();
-                db.finishRound(gameID, (int)(long) round);
-                db.close();
-
-                spinner.setSelection(round.intValue()+1,true);
             }
         });
     }
@@ -114,19 +90,14 @@ public class Game extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(this,"Not implemented", Toast.LENGTH_LONG).show();
+            //TODO: Settings
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     private static class MyAdapter extends ArrayAdapter<String> implements ThemedSpinnerAdapter {
