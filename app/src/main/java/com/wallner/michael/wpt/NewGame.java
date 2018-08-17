@@ -145,7 +145,7 @@ public class NewGame extends AppCompatActivity
     public void onClickPlayer(DialogFragment dialog,String selectedplayer ) {
         Toast toast = Toast.makeText(
                 getApplicationContext(),
-                selectedplayer,
+                selectedplayer + " ist der erste Geber!",
                 Toast.LENGTH_LONG);
         toast.show();
 

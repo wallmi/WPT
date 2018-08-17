@@ -194,7 +194,7 @@ public class RoundFragment extends Fragment
                     Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     Spinner sp = getActivity().findViewById(R.id.spinner);
-                    sp.setSelection(round, true);
+                    sp.setSelection(round + 1, true);
                 }
             }
         });

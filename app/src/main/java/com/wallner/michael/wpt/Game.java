@@ -18,10 +18,9 @@ import android.content.res.Resources.Theme;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 import com.wallner.michael.wpt.fragments.RoundFragment;
 import com.wallner.michael.wpt.db.WPTDataSource;
+import com.wallner.michael.wpt.fragments.ShowScore;
 
 import static com.wallner.michael.wpt.R.id.container;
 
@@ -42,19 +41,14 @@ public class Game extends AppCompatActivity {
         setTitle(getIntent().getExtras().getString("GameName"));
 
         int anzplayer = db.getAnzPlayerbyGameID(gameID);
-        int rounds = 0;
+        int rounds = GameRules.getRounds(anzplayer);
 
-        //Anzahl der Spielrunden ermitteln
-        switch (anzplayer) {
-            case 6: rounds = 10; break;
-            case 5: rounds = 12; break;
-            case 4: rounds = 15; break;
-            case 3: rounds = 20; break;
-         }
+        String tabs[] = new String[rounds + 1];
+        tabs[0] = "Score Board";
 
-        String tabs[] = new String[rounds];
-        for (int i=1; i <=rounds; i++)
-            tabs[i-1] = getString(R.string.game)+ " "+i;
+        for (int i=1; i <= rounds; i++)
+            tabs[i] = getString(R.string.game)+ " "+i;
+
 
         final Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(new MyAdapter(
@@ -66,10 +60,18 @@ public class Game extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int round, long id) {
                 // When the given dropdown item is selected, show its contents in the
                 // container view.
-                getSupportFragmentManager().beginTransaction()
-                        .replace(container, RoundFragment
-                                .newInstance(round + 1 ,gameID))
-                        .commit();
+                if (round == 0) {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(container, ShowScore
+                                    .newInstance(gameID))
+                            .commit();
+                }
+                else {
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(container, RoundFragment
+                                    .newInstance(round, gameID))
+                            .commit();
+                }
             }
 
             @Override

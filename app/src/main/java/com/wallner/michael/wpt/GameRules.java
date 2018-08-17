@@ -36,7 +36,7 @@ public class GameRules {
     }
 
     //TODO: Aktuell nur Standardschema abgebildet
-    public Integer getPoints (Integer hip, Integer done){
+    static public Integer getPoints (Integer hip, Integer done){
         if (hip > done)     return (done - hip)*10;
         if (hip < done)     return (hip - done)*10;
         return 20 + hip * 10;
@@ -70,5 +70,15 @@ public class GameRules {
         }
 
         return true;
+    }
+
+    public static int getRounds(int anzplayer) {
+        switch (anzplayer) {
+            case 6: return 10;
+            case 5: return 12;
+            case 4: return 15;
+            case 3: return 20;
+            default: return 0;
+        }
     }
 }
