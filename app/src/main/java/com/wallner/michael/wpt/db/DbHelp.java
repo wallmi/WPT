@@ -12,9 +12,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import javax.xml.datatype.Duration;
-
-
 /**
  * Created by Michael on 08.04.2017 for WPT
  *
@@ -30,7 +27,7 @@ public class DbHelp extends SQLiteOpenHelper {
 
     //Datenbankname am Filesystem
     private static final String DATABASE_NAME = "WPT.db";
-    static final String DATABASE_PATH = "/data/data/com.wallner.michael.wpt/databases/";
+    private static final String DATABASE_PATH = "/data/data/com.wallner.michael.wpt/databases/";
 
     //Table Options
     public static final String TABLE_OPT = "options";

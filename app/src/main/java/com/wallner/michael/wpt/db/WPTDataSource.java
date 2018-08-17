@@ -142,7 +142,6 @@ public class WPTDataSource extends DbHelp{
     }
 
     public String[][] getGames() {
-        //TODO: Check noch ungeprüft
         String[] selectionName = {COLUMN_GAMES_ID,
                 COLUMN_GAMES_ANZPLAYER,
                 COLUMN_GAMES_NAME};

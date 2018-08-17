@@ -38,10 +38,7 @@ public class Game extends AppCompatActivity {
         WPTDataSource db = new WPTDataSource(this);
         db.open();
 
-        //TODO: getInt NullPointerExeption
-
         final int gameID = getIntent().getExtras().getInt("GameID",-1);
-
         setTitle(getIntent().getExtras().getString("GameName"));
 
         int anzplayer = db.getAnzPlayerbyGameID(gameID);

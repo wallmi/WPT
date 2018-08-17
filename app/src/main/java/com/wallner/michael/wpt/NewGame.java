@@ -22,7 +22,6 @@ import com.wallner.michael.wpt.fragments.SelectPlayer;
 
 import static com.wallner.michael.wpt.db.DbHelp.*;
 
-
 public class NewGame extends AppCompatActivity
         implements SelectPlayer.NoticeDialogListener {
 
@@ -37,7 +36,6 @@ public class NewGame extends AppCompatActivity
     @BindView(R.id.player5) EditText p5;
     @BindView(R.id.player6) EditText p6;
     @BindView(R.id.gameName) EditText gn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +110,11 @@ public class NewGame extends AppCompatActivity
 
         gn.setText(gamename);
 
-        //Spielernamen laden
         spinner.setSelection(h.getIndex(spinner,  db.getOpt(OPT_ANZPLAYER)));
         p1.setText(db.getOpt(OPT_NAME_P1)); p2.setText(db.getOpt(OPT_NAME_P2));
         p3.setText(db.getOpt(OPT_NAME_P3)); p4.setText(db.getOpt(OPT_NAME_P4));
         p5.setText(db.getOpt(OPT_NAME_P5)); p6.setText(db.getOpt(OPT_NAME_P6));
 
-        //Datenbank schließen
         db.close();
 
         //Wenn leer dann Standardnamen aus strings.xml ziehen

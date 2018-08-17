@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class LoadGame extends AppCompatActivity {
 
-    private ListView lv_games;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,8 @@ public class LoadGame extends AppCompatActivity {
 
         WPTDataSource db = new WPTDataSource(this);
         db.open();
+
+        ListView lv_games;
 
         final String[][] games = db.getGames();
         lv_games = findViewById(R.id.lv_games);
