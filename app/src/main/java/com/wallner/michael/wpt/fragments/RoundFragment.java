@@ -66,12 +66,8 @@ public class RoundFragment extends Fragment
     @BindView(R.id.p5)    LinearLayout p5;
     @BindView(R.id.p6)    LinearLayout p6;
 
-    @BindView(R.id.fab) FloatingActionButton fab;
-
     @BindView(R.id.all_done) TextView all_done;
     @BindView(R.id.all_hip) TextView all_hip;
-
-    @BindView(R.id.main) LinearLayout main;
 
     public RoundFragment() {
     }
@@ -176,43 +172,8 @@ public class RoundFragment extends Fragment
 
         db.close();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                //Long round = spinner.getSelectedItemId();
-                Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
-                WPTDataSource db = new WPTDataSource(getContext());
-                int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
-
-                if (GameRules.roundOK(getContext(), gameID, round)) {
-                    db.open();
-                    db.finishRound(gameID, (int) (long) round);
-                    db.close();
-
-                    //Integer showRound = (int) (long) round + 1;
-                    Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    Spinner sp = getActivity().findViewById(R.id.spinner);
-                    sp.setSelection(round + 1, true);
-                }
-            }
-        });
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
-        WPTDataSource db = new WPTDataSource(getContext());
-        int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
-
-        db.open();
-        if (db.isRoundFinished(gameID,round))
-            fab.setVisibility(View.INVISIBLE);
-
-        db.close();
-        super.onResume();
     }
 
     @Override

@@ -24,7 +24,6 @@
     <string name="del_game">press long to delete</string>
     <string name="super_cooles_bild_fehlt" translatable="false">Super cooles Bild fehlt</string>
     <string name="default_points" translatable="false">20</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="project_on_github">Project on Github</string>
+    <string name="report_bug_feature">Report Bug / Feature</string>
 </resources>

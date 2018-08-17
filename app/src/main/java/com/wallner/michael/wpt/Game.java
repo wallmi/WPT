@@ -1,8 +1,11 @@
 package com.wallner.michael.wpt;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,16 +25,25 @@ import com.wallner.michael.wpt.fragments.RoundFragment;
 import com.wallner.michael.wpt.db.WPTDataSource;
 import com.wallner.michael.wpt.fragments.ShowScore;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.wallner.michael.wpt.R.id.container;
 
 
 public class Game extends AppCompatActivity {
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @BindView(R.id.spinner) Spinner spinner;
 
     @Override
     //Game erstellen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        ButterKnife.bind(this);
 
         //Optionen DB öffnen
         WPTDataSource db = new WPTDataSource(this);
@@ -49,8 +61,6 @@ public class Game extends AppCompatActivity {
         for (int i=1; i <= rounds; i++)
             tabs[i] = getString(R.string.game)+ " "+i;
 
-
-        final Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(new MyAdapter(
                 findViewById(R.id.toolbar).getContext(),
                 tabs));
@@ -72,14 +82,50 @@ public class Game extends AppCompatActivity {
                                     .newInstance(round, gameID))
                             .commit();
                 }
+
+                WPTDataSource db = new WPTDataSource(getBaseContext());
+                db.open();
+
+                if (round > 0) {
+                    if (db.isRoundFinished(gameID, round))
+                        fab.setVisibility(View.INVISIBLE);
+                    else
+                        fab.setVisibility(View.VISIBLE);
+                } else
+                    fab.setVisibility(View.INVISIBLE);
+
+                db.close();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-    }
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Long round = spinner.getSelectedItemId();
+                //Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
+                Integer round = spinner.getSelectedItemPosition();
+                WPTDataSource db = new WPTDataSource(getBaseContext());
+
+                final int gameID = getIntent().getExtras().getInt("GameID",-1);
+
+                if (GameRules.roundOK(getBaseContext(), gameID, round)) {
+                    db.open();
+                    db.finishRound(gameID, (int) (long) round);
+                    db.close();
+                    //Integer showRound = (int) (long) round + 1;
+                    Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                    spinner.setSelection(round + 1, true);
+                }
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

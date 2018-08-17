@@ -1,19 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="false"
-    android:orientation="vertical"
-    android:paddingBottom="50sp"
-    tools:context="com.wallner.michael.wpt.fragments.RoundFragment">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10pt">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -30,14 +27,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/angesagt"
-                    android:textSize="10pt" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/all_hip"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingRight="15dp"
                     android:textAlignment="textEnd"
-                    android:textSize="12pt"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     tools:text="0" />
             </LinearLayout>
@@ -51,14 +49,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/gemacht"
-                    android:textSize="10pt" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/all_done"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingRight="15dp"
                     android:textAlignment="textEnd"
-                    android:textSize="12pt"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     tools:text="0" />
             </LinearLayout>
@@ -69,14 +68,17 @@
             android:layout_height="match_parent"
             android:text="@string/punkte"
             android:textAlignment="textEnd"
-            android:textSize="12pt" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/p1_name"
@@ -84,7 +86,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p1_dealer"
@@ -117,7 +119,7 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -125,7 +127,10 @@
         android:id="@+id/p2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p1">
 
         <TextView
             android:id="@+id/p2_name"
@@ -133,7 +138,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p2_dealer"
@@ -166,7 +171,7 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -174,7 +179,10 @@
         android:id="@+id/p3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p2">
 
         <TextView
             android:id="@+id/p3_name"
@@ -182,7 +190,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p3_dealer"
@@ -215,7 +223,7 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -223,7 +231,10 @@
         android:id="@+id/p4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p3">
 
         <TextView
             android:id="@+id/p4_name"
@@ -231,7 +242,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p4_dealer"
@@ -264,7 +275,7 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -272,7 +283,9 @@
         android:id="@+id/p5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p4">
 
         <TextView
             android:id="@+id/p5_name"
@@ -280,7 +293,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p5_dealer"
@@ -313,7 +326,7 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -321,7 +334,10 @@
         android:id="@+id/p6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p5">
 
         <TextView
             android:id="@+id/p6_name"
@@ -329,7 +345,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:text="@string/dummy1"
-            android:textSize="12pt" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/p6_dealer"
@@ -362,15 +378,9 @@
             android:layout_weight="9"
             android:text="@string/default_points"
             android:textAlignment="center"
-            android:textSize="12pt"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="50sp"
-        android:layout_gravity="end"
-        android:layout_marginEnd="15sp"
-        app:srcCompat="@android:drawable/ic_media_ff" />
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
