@@ -1,7 +1,6 @@
 package com.wallner.michael.wpt;
 
 import android.content.Context;
-//import android.os.Environment;
 import android.widget.Spinner;
 import android.widget.Toast;
 

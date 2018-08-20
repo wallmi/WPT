@@ -1,11 +1,12 @@
 package com.wallner.michael.wpt;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.AttributeSet;
+import android.support.v7.widget.ThemedSpinnerAdapter;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,11 +16,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.content.Context;
-import android.support.v7.widget.ThemedSpinnerAdapter;
-import android.content.res.Resources.Theme;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.content.Context;
+import android.content.res.Resources.Theme;
 
 import com.wallner.michael.wpt.fragments.RoundFragment;
 import com.wallner.michael.wpt.db.WPTDataSource;
@@ -110,11 +111,12 @@ public class Game extends AppCompatActivity {
                 //Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
                 Integer round = spinner.getSelectedItemPosition();
                 WPTDataSource db = new WPTDataSource(getBaseContext());
-
+                db.open();
                 final int gameID = getIntent().getExtras().getInt("GameID",-1);
+                final boolean isprevroundfinished = db.isRoundFinished(gameID,round -1);
 
-                if (GameRules.roundOK(getBaseContext(), gameID, round)) {
-                    db.open();
+                if (isprevroundfinished || round == 1){
+                    if (GameRules.roundOK(getBaseContext(), gameID, round)) {
                     db.finishRound(gameID, (int) (long) round);
                     db.close();
                     //Integer showRound = (int) (long) round + 1;
@@ -122,7 +124,11 @@ public class Game extends AppCompatActivity {
                             .setAction("Action", null).show();
 
                     spinner.setSelection(round + 1, true);
+                    }
                 }
+                else
+                    Toast.makeText(getBaseContext(), "Vorherige Runde noch nicht beendet",
+                            Toast.LENGTH_LONG).show();
             }
         });
     }

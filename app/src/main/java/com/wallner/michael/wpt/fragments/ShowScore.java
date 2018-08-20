@@ -1,6 +1,5 @@
 package com.wallner.michael.wpt.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -49,7 +48,7 @@ public class ShowScore extends Fragment {
     @BindView(R.id.p6)    LinearLayout p6;
 
     public ShowScore() {
-        // Required empty public constructor
+
     }
 
     public static ShowScore newInstance(int gameID) {
@@ -106,10 +105,6 @@ public class ShowScore extends Fragment {
         db.open();
 
         Integer p1_p = 0, p2_p = 0, p3_p = 0, p4_p = 0, p5_p = 0, p6_p = 0;
-        //Anzahl der runden ermitteln OK
-        //Abfragen ob runde beendet ist  OK
-        //Wenn ja Punkte ausrechnen  OK
-        //und je Spieler addieren  OK
 
         int anzplayer = db.getAnzPlayerbyGameID(gameID);
         int rounds = GameRules.getRounds(anzplayer);
