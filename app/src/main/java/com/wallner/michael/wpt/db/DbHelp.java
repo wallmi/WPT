@@ -27,7 +27,6 @@ public class DbHelp extends SQLiteOpenHelper {
 
     //Datenbankname am Filesystem
     private static final String DATABASE_NAME = "WPT.db";
-    private static final String DATABASE_PATH = "/data/data/com.wallner.michael.wpt/databases/";
 
     //Table Options
     public static final String TABLE_OPT = "options";
@@ -193,11 +192,11 @@ public class DbHelp extends SQLiteOpenHelper {
 
     private void backupdbFile (Integer oldVersion){
         try {
-
-            File dbFile = new File(DATABASE_PATH + DATABASE_NAME);
+            String path = ct.getFilesDir().getPath();
+            File dbFile = new File(path + DATABASE_NAME);
             FileInputStream fis = new FileInputStream(dbFile);
 
-            String outFileName = DATABASE_PATH + DATABASE_NAME + "_" + oldVersion.toString();
+            String outFileName = path + DATABASE_NAME + "_" + oldVersion.toString();
 
             OutputStream output = new FileOutputStream(outFileName);
 

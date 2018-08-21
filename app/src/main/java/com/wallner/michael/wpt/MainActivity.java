@@ -5,13 +5,22 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.textView2) TextView txView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);     //Ressourcen laden
+        ButterKnife.bind(this);
+
+        //txView2.setText(txView2.getText()+ getApplicationContext().getPackageName());
     }
 
     //Neues Spiel starten
