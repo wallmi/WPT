@@ -27,7 +27,6 @@ public class NewGame extends AppCompatActivity
 
     private final GameRules h = new GameRules();
     private final WPTDataSource db =new WPTDataSource(this);
-    private Spinner spinner;
 
     @BindView(R.id.player1) EditText p1;
     @BindView(R.id.player2) EditText p2;
@@ -36,6 +35,8 @@ public class NewGame extends AppCompatActivity
     @BindView(R.id.player5) EditText p5;
     @BindView(R.id.player6) EditText p6;
     @BindView(R.id.gameName) EditText gn;
+
+    @BindView(R.id.spinner) Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +150,9 @@ public class NewGame extends AppCompatActivity
                 Toast.LENGTH_LONG);
         toast.show();
 
+        int anzplayer = GameRules.getRounds(Integer.parseInt(
+                spinner.getSelectedItem().toString()));
+
         String playernames[] = {
                 p1.getText().toString(),p2.getText().toString(),p3.getText().toString(),
                 p4.getText().toString(),p5.getText().toString(),p6.getText().toString()
@@ -163,12 +167,16 @@ public class NewGame extends AppCompatActivity
 
         db.open();
         //Erstelle neues Spiel in der Datenbank
-        int GameID = db.createGame(Integer.parseInt(spinner.getSelectedItem().toString()),
+        int GameID = db.createGame(anzplayer,
                 gn.getText().toString(),
                 p1.getText().toString(),p2.getText().toString(),
                 p3.getText().toString(),p4.getText().toString(),
                 p5.getText().toString(),p6.getText().toString(),
                 giver);
+
+        int rounds = GameRules.getRounds(anzplayer);
+        for (int i = 1; i <= rounds; i ++)
+            db.addRound(GameID,i);
 
         Intent intent = new Intent(this, Game.class);
         //GameID übergeben

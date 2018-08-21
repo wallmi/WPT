@@ -80,7 +80,6 @@ public class RoundFragment extends Fragment
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -99,8 +98,8 @@ public class RoundFragment extends Fragment
 
         //Optionen DB öffnen
         WPTDataSource db = new WPTDataSource(getContext());
-        db.open();
-        db.addRound(gameID,round);
+        //db.open();
+        //db.addRound(gameID,round);
 
         //int anzp = Integer.parseInt(o.getValue("anzplayer"));
         int anzp = db.getAnzPlayerbyGameID(gameID);
