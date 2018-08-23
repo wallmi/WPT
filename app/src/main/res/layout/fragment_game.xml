@@ -9,66 +9,57 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/angesagt"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/all_hip"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/angesagt"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/all_hip"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="15dp"
-                    android:textAlignment="textEnd"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    tools:text="0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/gemacht"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/all_done"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="15dp"
-                    android:textAlignment="textEnd"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    tools:text="0" />
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textAlignment="textEnd"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:text="0" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/punkte"
-            android:textAlignment="textEnd"
-            android:textSize="20sp" />
+            android:layout_weight="6"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/gemacht"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/all_done"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textAlignment="textEnd"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                tools:text="0" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -83,9 +74,9 @@
 
         <TextView
             android:id="@+id/p1_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -93,41 +84,44 @@
             android:id="@+id/p1_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p1_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p1_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p1_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p1_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,9 +129,9 @@
 
         <TextView
             android:id="@+id/p2_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -145,41 +139,44 @@
             android:id="@+id/p2_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p2_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p2_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p2_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p2_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -187,9 +184,9 @@
 
         <TextView
             android:id="@+id/p3_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -197,41 +194,44 @@
             android:id="@+id/p3_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p3_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p3_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p3_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p3_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -239,9 +239,9 @@
 
         <TextView
             android:id="@+id/p4_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -249,50 +249,53 @@
             android:id="@+id/p4_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p4_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p4_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p4_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p4_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/p4">
 
         <TextView
             android:id="@+id/p5_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -300,41 +303,44 @@
             android:id="@+id/p5_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p5_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p5_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p5_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p5_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/p6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -342,9 +348,9 @@
 
         <TextView
             android:id="@+id/p6_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:maxLines="1"
             android:text="@string/dummy1"
             android:textSize="22sp" />
 
@@ -352,36 +358,37 @@
             android:id="@+id/p6_dealer"
             android:layout_width="20sp"
             android:layout_height="match_parent"
+            android:contentDescription="@string/dealer"
             android:src="@android:drawable/presence_online"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/p6_points"
+            android:layout_width="60sp"
+            android:layout_height="match_parent"
+            android:text="@string/default_points"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
             android:orientation="vertical">
 
             <SeekBar
                 android:id="@+id/p6_hip"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
 
             <SeekBar
                 android:id="@+id/p6_done"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/p6_points"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:text="@string/default_points"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

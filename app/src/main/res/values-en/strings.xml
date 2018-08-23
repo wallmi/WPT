@@ -19,4 +19,5 @@
     <string name="gemacht">total made</string>
     <string name="game">Game</string>
     <string name="del_game">press long to delete</string>
+    <string name="dealer">Dealer</string>
 </resources>

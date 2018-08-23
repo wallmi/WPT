@@ -10,7 +10,8 @@
         android:id="@+id/p1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p1_name"
@@ -19,13 +20,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p1_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p1_points"
@@ -43,7 +37,8 @@
         android:id="@+id/p2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p2_name"
@@ -52,13 +47,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p2_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p2_points"
@@ -75,7 +63,8 @@
         android:id="@+id/p3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p3_name"
@@ -84,13 +73,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p3_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p3_points"
@@ -107,7 +89,8 @@
         android:id="@+id/p4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p4_name"
@@ -116,13 +99,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p4_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p4_points"
@@ -139,7 +115,8 @@
         android:id="@+id/p5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p5_name"
@@ -148,13 +125,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p5_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p5_points"
@@ -171,7 +141,8 @@
         android:id="@+id/p6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="8sp">
 
         <TextView
             android:id="@+id/p6_name"
@@ -180,13 +151,6 @@
             android:layout_weight="6"
             android:text="@string/dummy1"
             android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/p6_dealer"
-            android:layout_width="20sp"
-            android:layout_height="match_parent"
-            android:src="@android:drawable/presence_online"
-            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/p6_points"
