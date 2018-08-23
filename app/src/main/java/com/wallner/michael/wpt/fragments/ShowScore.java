@@ -67,9 +67,8 @@ public class ShowScore extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show_score, container, false);
         ButterKnife.bind(this, view);       //Butterknife
 
-        int gameID;
         if (getArguments() != null) {
-            gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+            int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
 
             WPTDataSource db = new WPTDataSource(getContext());
             db.open();

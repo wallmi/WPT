@@ -21,9 +21,12 @@ public class DbHelp extends SQLiteOpenHelper {
     SQLiteDatabase database;
     public Context ct;
 
-    //Version der Datenbank
+    /**
+     Version 1: never released
+     Version 2: vVersioncode 1 to 2 (actually)
+        added in TABLE Games: Giver
+     */
     private static final int DATABASE_VERSION = 2;
-    //Version 2: Added TABLE Games Giver
 
     //Datenbankname am Filesystem
     private static final String DATABASE_NAME = "WPT.db";
@@ -216,5 +219,3 @@ public class DbHelp extends SQLiteOpenHelper {
         }
     }
 }
-
-

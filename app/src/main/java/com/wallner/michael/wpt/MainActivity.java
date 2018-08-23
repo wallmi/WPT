@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);     //Ressourcen laden
         ButterKnife.bind(this);
 
-        //txView2.setText(txView2.getText()+ getApplicationContext().getPackageName());
+        txView2.setText(txView2.getText()+ BuildConfig.VERSION_NAME);
+
     }
 
     //Neues Spiel starten

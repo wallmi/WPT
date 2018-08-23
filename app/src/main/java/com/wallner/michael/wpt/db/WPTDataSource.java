@@ -82,35 +82,39 @@ public class WPTDataSource extends DbHelp{
     }
 
     public String[] getPlayerNamesbyGameID (Integer gameID) {
-        String Selection = COLUMN_GAMES_ID + "= ?";
-        String[] selectionArgs = { gameID.toString() };
-        String[] selectionName = { COLUMN_GAMES_P1 ,
-                COLUMN_GAMES_P2,
-                COLUMN_GAMES_P3,
-                COLUMN_GAMES_P4,
-                COLUMN_GAMES_P5,
-                COLUMN_GAMES_P6
-                };
+        String[] value = {"", "", "", "", "", ""};
+        try {
+            String Selection = COLUMN_GAMES_ID + "= ?";
+            String[] selectionArgs = {gameID.toString()};
+            String[] selectionName = {COLUMN_GAMES_P1,
+                    COLUMN_GAMES_P2,
+                    COLUMN_GAMES_P3,
+                    COLUMN_GAMES_P4,
+                    COLUMN_GAMES_P5,
+                    COLUMN_GAMES_P6
+            };
 
-        Cursor cursor = database.query(
-                TABLE_GAMES,              // The table to query
-                selectionName,                             // The columns to return
-                Selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                null                                 // The sort order
-        );
+            Cursor cursor = database.query(
+                    TABLE_GAMES,              // The table to query
+                    selectionName,                             // The columns to return
+                    Selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                                     // don't group the rows
+                    null,                                     // don't filter by row groups
+                    null                                 // The sort order
+            );
 
-        String[] value = {"","","","","",""};
-        while(cursor.moveToNext())
-            for (int i=0; i<=5; i++)
-                value[i] = cursor.getString(cursor.getColumnIndexOrThrow(OPT_NAMES[i]));
+            while (cursor.moveToNext())
+                for (int i = 0; i <= 5; i++)
+                    value[i] = cursor.getString(cursor.getColumnIndexOrThrow(OPT_NAMES[i]));
 
-        cursor.close();
-        return value;
+            cursor.close();
+            return value;
+        }
+        catch (Exception ex) {
+            return value;
+        }
     }
-
 
     public int createGame (int anzplayer, String gameName,
                             String player1, String player2, String player3,
@@ -297,7 +301,6 @@ public class WPTDataSource extends DbHelp{
         }
         c.close();
         return value.equals("1");
-
     }
 
     public int firstGiver (Integer gameID){
@@ -318,5 +321,4 @@ public class WPTDataSource extends DbHelp{
         c.close();
         return value;
     }
-
 }

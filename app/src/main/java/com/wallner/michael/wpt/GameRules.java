@@ -21,7 +21,7 @@ public class GameRules {
     //}
 
     //private method of your class
-    public int getIndex(Spinner spinner, String myString)
+    static public int getIndex(Spinner spinner, String myString)
     {
         int index = 0;
 
@@ -41,7 +41,7 @@ public class GameRules {
         return 20 + hip * 10;
     }
 
-    public String int2string (Integer i) {
+    static public String int2string (Integer i) {
         if (i == null)
             return "0";
 

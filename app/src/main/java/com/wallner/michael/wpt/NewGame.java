@@ -25,7 +25,6 @@ import static com.wallner.michael.wpt.db.DbHelp.*;
 public class NewGame extends AppCompatActivity
         implements SelectPlayer.NoticeDialogListener {
 
-    private final GameRules h = new GameRules();
     private final WPTDataSource db =new WPTDataSource(this);
 
     @BindView(R.id.player1) EditText p1;
@@ -111,12 +110,10 @@ public class NewGame extends AppCompatActivity
 
         gn.setText(gamename);
 
-        spinner.setSelection(h.getIndex(spinner,  db.getOpt(OPT_ANZPLAYER)));
+        spinner.setSelection(GameRules.getIndex(spinner,  db.getOpt(OPT_ANZPLAYER)));
         p1.setText(db.getOpt(OPT_NAME_P1)); p2.setText(db.getOpt(OPT_NAME_P2));
         p3.setText(db.getOpt(OPT_NAME_P3)); p4.setText(db.getOpt(OPT_NAME_P4));
         p5.setText(db.getOpt(OPT_NAME_P5)); p6.setText(db.getOpt(OPT_NAME_P6));
-
-        db.close();
 
         //Wenn leer dann Standardnamen aus strings.xml ziehen
         if (p1.getText().toString().isEmpty()) p1.setText(getString(R.string.player_1));
@@ -125,6 +122,8 @@ public class NewGame extends AppCompatActivity
         if (p4.getText().toString().isEmpty()) p4.setText(getString(R.string.player_4));
         if (p5.getText().toString().isEmpty()) p5.setText(getString(R.string.player_5));
         if (p6.getText().toString().isEmpty()) p6.setText(getString(R.string.player_6));
+
+        db.close();
     }
 
     //Starten des Dialoges SelectPlayer
@@ -150,8 +149,8 @@ public class NewGame extends AppCompatActivity
                 Toast.LENGTH_LONG);
         toast.show();
 
-        int anzplayer = GameRules.getRounds(Integer.parseInt(
-                spinner.getSelectedItem().toString()));
+        int anzplayer = Integer.parseInt(spinner.getSelectedItem().toString());
+        int rounds = GameRules.getRounds(anzplayer);
 
         String playernames[] = {
                 p1.getText().toString(),p2.getText().toString(),p3.getText().toString(),
@@ -159,7 +158,6 @@ public class NewGame extends AppCompatActivity
         };
 
         int giver = 0;
-
         for (int i = 0;i < playernames.length;i++){
             if (playernames[i].equals(selectedplayer))
                 giver = i +1;
@@ -174,7 +172,6 @@ public class NewGame extends AppCompatActivity
                 p5.getText().toString(),p6.getText().toString(),
                 giver);
 
-        int rounds = GameRules.getRounds(anzplayer);
         for (int i = 1; i <= rounds; i ++)
             db.addRound(GameID,i);
 

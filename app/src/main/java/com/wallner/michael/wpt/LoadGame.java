@@ -87,7 +87,6 @@ public class LoadGame extends AppCompatActivity {
         db.close();
 
         startActivity(intent);
-
     }
 
     private void deleteGame(Integer gameID){

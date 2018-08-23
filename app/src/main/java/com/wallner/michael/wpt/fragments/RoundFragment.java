@@ -98,7 +98,7 @@ public class RoundFragment extends Fragment
 
         //Optionen DB öffnen
         WPTDataSource db = new WPTDataSource(getContext());
-        //db.open();
+        db.open();
         //db.addRound(gameID,round);
 
         //int anzp = Integer.parseInt(o.getValue("anzplayer"));
@@ -161,14 +161,7 @@ public class RoundFragment extends Fragment
             case 6: p6_dealer.setVisibility(View.VISIBLE); break;
         }
 
-        /*
-         *  Button für nächste Runde
-         */
-        //FloatingActionButton fab = findViewById(R.id.fab);
-
         db.close();
-
-
         return view;
     }
 
@@ -187,6 +180,7 @@ public class RoundFragment extends Fragment
                 p4_done, p5_done, p6_done
         };
         boolean roundfinished = db.isRoundFinished(gameID,round);
+        db.close();
 
         for (SeekBar sb: Seekbars) {
             //sb.setProgress(0);
@@ -196,14 +190,12 @@ public class RoundFragment extends Fragment
 
         if (roundfinished)
             Toast.makeText(getContext(),
-                    "Runde " +  round.toString()  + " ist schon beendet", Toast.LENGTH_LONG).show();
-
-      db.close();
+                    "Runde " +  round.toString()  + " ist schon beendet",
+                    Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProgressChanged(SeekBar p, int progress,boolean fromUser) {
-        GameRules h = new GameRules();
 
         int round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
         int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
@@ -212,30 +204,31 @@ public class RoundFragment extends Fragment
         db.open();
 
         if (p.getId() == p1_done.getId() || p.getId() == p1_hip.getId())
-            p1_points.setText(h.int2string(h.getPoints(p1_hip.getProgress(), p1_done.getProgress())));
+            p1_points.setText(GameRules.int2string(GameRules.getPoints(p1_hip.getProgress(), p1_done.getProgress())));
 
         if (p.getId() == p2_done.getId() || p.getId() == p2_hip.getId())
-            p2_points.setText(h.int2string(h.getPoints(p2_hip.getProgress(),p2_done.getProgress())));
+            p2_points.setText(GameRules.int2string(GameRules.getPoints(p2_hip.getProgress(),p2_done.getProgress())));
 
         if (p.getId() == p3_done.getId() || p.getId() == p3_hip.getId())
-            p3_points.setText(h.int2string(h.getPoints(p3_hip.getProgress(),p3_done.getProgress())));
+            p3_points.setText(GameRules.int2string(GameRules.getPoints(p3_hip.getProgress(),p3_done.getProgress())));
 
         if (p.getId() == p4_done.getId() || p.getId() == p4_hip.getId())
-            p4_points.setText(h.int2string(h.getPoints(p4_hip.getProgress(),p4_done.getProgress())));
+            p4_points.setText(GameRules.int2string(GameRules.getPoints(p4_hip.getProgress(),p4_done.getProgress())));
 
         if (p.getId() == p5_done.getId() || p.getId() == p5_hip.getId())
-            p5_points.setText(h.int2string(h.getPoints(p5_hip.getProgress(),p5_done.getProgress())));
+            p5_points.setText(GameRules.int2string(GameRules.getPoints(p5_hip.getProgress(),p5_done.getProgress())));
 
         if (p.getId() == p6_done.getId() || p.getId() == p6_hip.getId())
-            p6_points.setText(h.int2string(h.getPoints(p6_hip.getProgress(),p6_done.getProgress())));
+            p6_points.setText(GameRules.int2string(GameRules.getPoints(p6_hip.getProgress(),p6_done.getProgress())));
 
-        all_done.setText(h.int2string(p1_done.getProgress()+p2_done.getProgress()+p3_done.getProgress()
+        all_done.setText(GameRules.int2string(p1_done.getProgress()+p2_done.getProgress()+p3_done.getProgress()
                 +p4_done.getProgress()+p5_done.getProgress()+p6_done.getProgress()));
 
-        all_hip.setText(h.int2string(p1_hip.getProgress()+p2_hip.getProgress()+p3_hip.getProgress()
+        all_hip.setText(GameRules.int2string(p1_hip.getProgress()+p2_hip.getProgress()+p3_hip.getProgress()
                 +p4_hip.getProgress()+p5_hip.getProgress()+p6_hip.getProgress()));
 
         db.setPoints(gameID, round, p.getTag().toString(), p.getProgress());
+        db.close();
     }
 
     @Override

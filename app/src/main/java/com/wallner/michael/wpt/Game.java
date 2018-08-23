@@ -53,7 +53,7 @@ public class Game extends AppCompatActivity {
         final int gameID = getIntent().getExtras().getInt("GameID",-1);
         setTitle(getIntent().getExtras().getString("GameName"));
 
-        int anzplayer = db.getAnzPlayerbyGameID(gameID);
+        final int anzplayer = db.getAnzPlayerbyGameID(gameID);
         int rounds = GameRules.getRounds(anzplayer);
 
         String tabs[] = new String[rounds + 1];
@@ -66,6 +66,7 @@ public class Game extends AppCompatActivity {
                 findViewById(R.id.toolbar).getContext(),
                 tabs));
 
+        //Runde selektiert
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int round, long id) {
@@ -103,6 +104,7 @@ public class Game extends AppCompatActivity {
             }
         });
 
+        //FAB nächste Runde
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,18 +119,26 @@ public class Game extends AppCompatActivity {
 
                 if (isprevroundfinished || round == 1){
                     if (GameRules.roundOK(getBaseContext(), gameID, round)) {
-                    db.finishRound(gameID, (int) (long) round);
-                    db.close();
-                    //Integer showRound = (int) (long) round + 1;
-                    Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                        db.finishRound(gameID, (int) (long) round);
+                        db.close();
 
-                    spinner.setSelection(round + 1, true);
+                        if (round == GameRules.getRounds(anzplayer)) {
+                            Toast.makeText(getBaseContext(), "Spiel beendet",
+                                    Toast.LENGTH_LONG).show();
+                            spinner.setSelection(0, true);
+                        } else {
+                            Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+
+                            spinner.setSelection(round + 1, true);
+                        }
                     }
                 }
                 else
                     Toast.makeText(getBaseContext(), "Vorherige Runde noch nicht beendet",
                             Toast.LENGTH_LONG).show();
+
+                db.close();
             }
         });
     }
