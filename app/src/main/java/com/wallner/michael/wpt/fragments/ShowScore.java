@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,14 +33,6 @@ public class ShowScore extends Fragment {
     @BindView(R.id.p4_points) TextView p4_points;
     @BindView(R.id.p5_points) TextView p5_points;
     @BindView(R.id.p6_points) TextView p6_points;
-
-
-    @BindView(R.id.p1_dealer) ImageView p1_dealer;
-    @BindView(R.id.p2_dealer) ImageView p2_dealer;
-    @BindView(R.id.p3_dealer) ImageView p3_dealer;
-    @BindView(R.id.p4_dealer) ImageView p4_dealer;
-    @BindView(R.id.p5_dealer) ImageView p5_dealer;
-    @BindView(R.id.p6_dealer) ImageView p6_dealer;
 
     @BindView(R.id.p4)    LinearLayout p4;
     @BindView(R.id.p5)    LinearLayout p5;

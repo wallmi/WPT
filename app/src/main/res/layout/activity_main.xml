@@ -25,6 +25,7 @@
                     android:layout_weight="1"
                     android:onClick="startNewGame"
                     android:text="@string/b_newgame"
+                    android:textSize="20sp"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
@@ -34,6 +35,7 @@
                     android:layout_weight="1"
                     android:onClick="loadGame"
                     android:text="@string/b_loadgame"
+                    android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/button5" />
         </LinearLayout>
 
@@ -98,6 +100,7 @@
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="16sp"
             android:textStyle="bold|italic"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/textView8"
             tools:layout_editor_absoluteX="151dp" />
 
@@ -110,7 +113,7 @@
             android:text="@string/report_bug_feature"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_dark"
-            android:textSize="16sp"
+            android:textSize="25sp"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="151dp" />

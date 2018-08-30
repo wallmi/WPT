@@ -26,4 +26,5 @@
     <string name="default_points" translatable="false">20</string>
     <string name="project_on_github" translatable="false">Project on Github</string>
     <string name="report_bug_feature" translatable="false">Report Bug / Feature</string>
+    <string name="dealer">Dealer</string>
 </resources>
