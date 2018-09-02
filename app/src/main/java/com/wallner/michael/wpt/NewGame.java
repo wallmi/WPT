@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -101,12 +102,14 @@ public class NewGame extends AppCompatActivity
         //Kalender
         //TODO: Lokalisierung
         Calendar c = Calendar.getInstance(Locale.GERMAN);
+
+        SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
+
         String gamename = "Spiel vom " +
-                c.get(Calendar.DAY_OF_MONTH) +"." +
-                c.get(Calendar.MONTH)+ "." +
-                c.get(Calendar.YEAR) +" um " +
-                c.get(Calendar.HOUR_OF_DAY) + ":" +
-                c.get(Calendar.MINUTE);
+                datumsformat.format(c.getTime()) +
+                " um " +
+                timeformat.format(c.getTime());
 
         gn.setText(gamename);
 
