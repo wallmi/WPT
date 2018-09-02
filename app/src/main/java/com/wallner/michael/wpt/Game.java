@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class Game extends AppCompatActivity {
     FloatingActionButton fab;
 
     @BindView(R.id.spinner) Spinner spinner;
+
+    @BindView(R.id.jump)    Button jump;
 
     @Override
     //Game erstellen
@@ -96,6 +99,13 @@ public class Game extends AppCompatActivity {
                 } else
                     fab.setVisibility(View.INVISIBLE);
 
+
+                if (spinner.getSelectedItemPosition() == 0)
+                    jump.setText(String.format("Runde %d", db.getCurrentRound(gameID)));
+                else
+                    jump.setText("Scoreboard");
+
+
                 db.close();
             }
 
@@ -141,6 +151,19 @@ public class Game extends AppCompatActivity {
                 db.close();
             }
         });
+    }
+
+    public void jumpto(View view){
+        final int gameID = getIntent().getExtras().getInt("GameID",-1);
+        if (spinner.getSelectedItemPosition() == 0){
+            WPTDataSource db = new WPTDataSource(getBaseContext());
+            db.open();
+            int curRound = db.getCurrentRound(gameID);
+            db.close();
+            spinner.setSelection(curRound);
+        }
+        else
+            spinner.setSelection(0);
     }
 
     @Override

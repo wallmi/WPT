@@ -316,9 +316,31 @@ public class WPTDataSource extends DbHelp{
 
         int value = -1;
         while (c.moveToNext()) {
-            value = c.getInt(c.getColumnIndexOrThrow(COLUMN_GAMES_GIVER));
+            value = c.getInt(c.getColumnIndexOrThrow(selectionName[0]));
         }
         c.close();
         return value;
+    }
+
+    public int getCurrentRound(Integer gameID){
+        String[] selectionArgs = {gameID.toString()};
+        String[] selectionName = {COLUMN_ROUNDS_NR,COLUMN_ROUNDS_FINISHED};
+        String Selection = COLUMN_GAMES_ID + "=?";
+
+        Cursor c = exSQL(TABLE_ROUNDS, Selection, selectionArgs, selectionName);
+
+        int value = 0;
+
+        if (c == null)
+            return value;
+
+        while (c.moveToNext()) {
+            if (c.getInt(c.getColumnIndexOrThrow(selectionName[1])) == 1 &&
+                    value < c.getInt(c.getColumnIndexOrThrow(selectionName[0])))
+            value = c.getInt(c.getColumnIndexOrThrow(selectionName[0]));
+
+        }
+        c.close();
+        return value + 1;
     }
 }
