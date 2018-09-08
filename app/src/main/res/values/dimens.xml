@@ -2,6 +2,10 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-
+    <dimen name="valueSelector_text">30dp</dimen>
+    <dimen name="valueSelector_label_text">14dp</dimen>
+    <dimen name="valueSelector_margin_top">14dp</dimen>
+    <dimen name="valueSelector_button_hMargin">25dp</dimen>
+    <dimen name="valueSelector_button_insideMargin">10dp</dimen>
 </resources>
 

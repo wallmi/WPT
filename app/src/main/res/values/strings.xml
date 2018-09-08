@@ -37,4 +37,6 @@
     <string name="round_finished">Round %d is already finished!</string>
     <string name="game_deleted">Game %s deleted</string>
     <string name="report_bug" translatable="false">mailto:wpt@wallner-michael.at?subject=Wizard%20Point%20Table</string>
+    <string name="valueSelector_label" translatable="false">VALUE</string>
+    <string name="valueBarLabel" translatable="false">CURRENT VALUE</string>
 </resources>
