@@ -27,6 +27,8 @@ import com.wallner.michael.wpt.fragments.RoundFragment;
 import com.wallner.michael.wpt.db.WPTDataSource;
 import com.wallner.michael.wpt.fragments.ShowScore;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,11 +37,11 @@ import static com.wallner.michael.wpt.R.id.container;
 
 public class Game extends AppCompatActivity {
 
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+    int gameID = -1;
+    int anzplayer;
 
+    @BindView(R.id.fab)    FloatingActionButton fab;
     @BindView(R.id.spinner) Spinner spinner;
-
     @BindView(R.id.jump)    Button jump;
 
     @Override
@@ -53,10 +55,12 @@ public class Game extends AppCompatActivity {
         WPTDataSource db = new WPTDataSource(this);
         db.open();
 
-        final int gameID = getIntent().getExtras().getInt("GameID",-1);
-        setTitle(getIntent().getExtras().getString("GameName"));
+        if (getIntent().getExtras() != null) {
+            gameID = getIntent().getExtras().getInt("GameID");
+            setTitle(getIntent().getExtras().getString("GameName"));
+        }
 
-        final int anzplayer = db.getAnzPlayerbyGameID(gameID);
+        anzplayer = db.getAnzPlayerbyGameID(gameID);
         int rounds = GameRules.getRounds(anzplayer);
 
         String tabs[] = new String[rounds + 1];
@@ -101,9 +105,10 @@ public class Game extends AppCompatActivity {
 
 
                 if (spinner.getSelectedItemPosition() == 0)
-                    jump.setText(String.format("Runde %d", db.getCurrentRound(gameID)));
+                    jump.setText(String.format(Locale.GERMAN,
+                            getString(R.string.round_x), db.getCurrentRound(gameID)));
                 else
-                    jump.setText("Scoreboard");
+                    jump.setText(R.string.Scoreboard);
 
 
                 db.close();
@@ -133,19 +138,24 @@ public class Game extends AppCompatActivity {
                         db.close();
 
                         if (round == GameRules.getRounds(anzplayer)) {
-                            Toast.makeText(getBaseContext(), "Spiel beendet",
+                            Toast.makeText(getBaseContext(), R.string.end_game,
                                     Toast.LENGTH_LONG).show();
                             spinner.setSelection(0, true);
                         } else {
-                            Snackbar.make(view, "Runde " + round.toString() + " beendet", Snackbar.LENGTH_LONG)
+                            Snackbar.make(view,
+                                    String.format(Locale.GERMAN,
+                                            getString(R.string.round_ended),round),
+                                    Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
+
+
 
                             spinner.setSelection(round + 1, true);
                         }
                     }
                 }
                 else
-                    Toast.makeText(getBaseContext(), "Vorherige Runde noch nicht beendet",
+                    Toast.makeText(getBaseContext(), R.string.prev_round_not_ended,
                             Toast.LENGTH_LONG).show();
 
                 db.close();
@@ -154,7 +164,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void jumpto(View view){
-        final int gameID = getIntent().getExtras().getInt("GameID",-1);
+        //final int gameID = getIntent().getExtras().getInt("GameID",-1);
         if (spinner.getSelectedItemPosition() == 0){
             WPTDataSource db = new WPTDataSource(getBaseContext());
             db.open();

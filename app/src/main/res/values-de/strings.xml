@@ -20,4 +20,11 @@
     <string name="game">Spiel</string>
     <string name="del_game">Lange drücken um zu löschen</string>
     <string name="dealer">Geber</string>
+    <string name="round_x">Runde %d</string>
+    <string name="end_game">Spiel beendet</string>
+    <string name="round_ended">Runde %d beendet</string>
+    <string name="prev_round_not_ended">Vorherige Runde noch nicht beendet!</string>
+    <string name="first_giver_is">%s ist der erste Geber!</string>
+    <string name="game_deleted">Spiel %s wurde gelöscht</string>
+    <string name="round_finished">Runde %d ist schon beendet!</string>
 </resources>

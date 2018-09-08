@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.wallner.michael.wpt.db.WPTDataSource;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class LoadGame extends AppCompatActivity {
 
@@ -65,7 +66,8 @@ public class LoadGame extends AppCompatActivity {
 
                 deleteGame(gameID);
 
-                Toast.makeText(getBaseContext(),"Spiel " + gameName + " wurde gelöscht",
+                Toast.makeText(getBaseContext(),
+                        String.format(Locale.GERMAN,getString(R.string.game_deleted), gameName),
                         Toast.LENGTH_LONG).show();
 
                 db.close();

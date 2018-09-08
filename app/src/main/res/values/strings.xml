@@ -27,4 +27,14 @@
     <string name="project_on_github" translatable="false">Project on Github</string>
     <string name="report_bug_feature" translatable="false">Report Bug / Feature</string>
     <string name="dealer">Dealer</string>
+    <string name="Scoreboard" translatable="false">Scoreboard</string>
+    <string name="round_x">round %d</string>
+    <string name="end_game">Game completed</string>
+    <string name="round_ended">Round %d completed</string>
+    <string name="prev_round_not_ended">previous round not finished!</string>
+    <string name="first_giver_is">%s is the first giver!</string>
+    <string name="git_link" translatable="false">https://github.com/wallmi/WPT</string>
+    <string name="round_finished">Round %d is already finished!</string>
+    <string name="game_deleted">Game %s deleted</string>
+    <string name="report_bug" translatable="false">mailto:wpt@wallner-michael.at?subject=Wizard%20Point%20Table</string>
 </resources>

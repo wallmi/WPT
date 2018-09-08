@@ -19,11 +19,11 @@ import java.io.OutputStream;
 
 public class DbHelp extends SQLiteOpenHelper {
     SQLiteDatabase database;
-    public Context ct;
+    Context ct;
 
     /**
      Version 1: never released
-     Version 2: vVersioncode 1 to 2 (actually)
+     Version 2: Versioncode 1 to 2 (actually)
         added in TABLE Games: Giver
      */
     private static final int DATABASE_VERSION = 2;
@@ -32,9 +32,9 @@ public class DbHelp extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "WPT.db";
 
     //Table Options
-    public static final String TABLE_OPT = "options";
-    public static final String COLUMN_OPT_OPT = "option";
-    public static final String COLUMN_OPT_VAL = "value";
+    static final String TABLE_OPT = "options";
+    static final String COLUMN_OPT_OPT = "option";
+    static final String COLUMN_OPT_VAL = "value";
 
     //Optionen
     public static final String OPT_ANZPLAYER = "anzplayer";
@@ -171,7 +171,7 @@ public class DbHelp extends SQLiteOpenHelper {
         database = getWritableDatabase();
     }
 
-    public Cursor exSQL (String Table, String Selection, String[] selectionArgs, String [] columsRet){
+    Cursor exSQL (String Table, String Selection, String[] selectionArgs, String [] columsRet){
         try{
             return database.query(
                     Table,              // The table to query
@@ -189,7 +189,7 @@ public class DbHelp extends SQLiteOpenHelper {
         }
     }
 
-    public void err_message (Exception ex){
+    void err_message (Exception ex){
         Toast.makeText(ct,"SQL Error: " + ex.getMessage(),Toast.LENGTH_LONG).show();
     }
 

@@ -1,6 +1,7 @@
 package com.wallner.michael.wpt.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,15 @@ import com.wallner.michael.wpt.GameRules;
 import com.wallner.michael.wpt.R;
 import com.wallner.michael.wpt.db.WPTDataSource;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class ShowScore extends Fragment {
+
+    int gameID = -1;
 
     @BindView(R.id.p1_name) TextView p1_name;
     @BindView(R.id.p2_name) TextView p2_name;
@@ -52,46 +57,40 @@ public class ShowScore extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (getArguments() != null)
+            gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
 
         View view = inflater.inflate(R.layout.fragment_show_score, container, false);
         ButterKnife.bind(this, view);       //Butterknife
 
-        if (getArguments() != null) {
-            int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+        WPTDataSource db = new WPTDataSource(getContext());
+        db.open();
+        int anzp = db.getAnzPlayerbyGameID(gameID);
+        String [] playernames = db.getPlayerNamesbyGameID(gameID);
+        db.close();
 
-            WPTDataSource db = new WPTDataSource(getContext());
-            db.open();
-            int anzp = db.getAnzPlayerbyGameID(gameID);
-            String [] playernames = db.getPlayerNamesbyGameID(gameID);
+        if (anzp < 4)   p4.setVisibility(View.INVISIBLE);
+        if (anzp < 5)   p5.setVisibility(View.INVISIBLE);
+        if (anzp < 6)   p6.setVisibility(View.INVISIBLE);
 
-            if (anzp < 4)   p4.setVisibility(View.INVISIBLE);
+        p1_name.setText(playernames[0]);
+        p2_name.setText(playernames[1]);
+        p3_name.setText(playernames[2]);
 
-            if (anzp < 5)   p5.setVisibility(View.INVISIBLE);
+        if (anzp >= 4)  p4_name.setText(playernames[3]);
+        if (anzp >= 5)  p5_name.setText(playernames[4]);
+        if (anzp >= 6)  p6_name.setText(playernames[5]);
 
-            if (anzp < 6)   p6.setVisibility(View.INVISIBLE);
-
-            p1_name.setText(playernames[0]);
-            p2_name.setText(playernames[1]);
-            p3_name.setText(playernames[2]);
-
-            if (anzp >= 4)
-                p4_name.setText(playernames[3]);
-            if (anzp >= 5)
-                p5_name.setText(playernames[4]);
-            if (anzp >= 6)
-                p6_name.setText(playernames[5]);
-
-            db.close();
-        }
         return view;
     }
 
     @Override
     public void onResume() {
         WPTDataSource db = new WPTDataSource(getContext());
-        int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+        //int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
         db.open();
 
         Integer p1_p = 0, p2_p = 0, p3_p = 0, p4_p = 0, p5_p = 0, p6_p = 0;
@@ -111,12 +110,12 @@ public class ShowScore extends Fragment {
             }
         }
 
-        p1_points.setText(p1_p.toString());
-        p2_points.setText(p2_p.toString());
-        p3_points.setText(p3_p.toString());
-        p4_points.setText(p4_p.toString());
-        p5_points.setText(p5_p.toString());
-        p6_points.setText(p6_p.toString());
+        p1_points.setText(String.format(Locale.getDefault(),"%d",p1_p));
+        p2_points.setText(String.format(Locale.getDefault(),"%d",p2_p));
+        p3_points.setText(String.format(Locale.getDefault(),"%d",p3_p));
+        p4_points.setText(String.format(Locale.getDefault(),"%d",p4_p));
+        p5_points.setText(String.format(Locale.getDefault(),"%d",p5_p));
+        p6_points.setText(String.format(Locale.getDefault(),"%d",p6_p));
 
         db.close();
         super.onResume();

@@ -15,12 +15,6 @@ import java.util.Locale;
 
 public class GameRules {
 
-    /* Checks if external storage is available for read and write */
-    //public boolean isExternalStorageWritable() {
-    //    return Environment.MEDIA_MOUNTED.equals( Environment.getExternalStorageState());
-    //}
-
-    //private method of your class
     static public int getIndex(Spinner spinner, String myString)
     {
         int index = 0;

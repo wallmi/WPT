@@ -43,7 +43,7 @@ public class NewGame extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game); //Setze Layout
         ButterKnife.bind(this);             //Butterknife
-        spinner = findViewById(R.id.spinner);
+
         db.open();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -99,9 +99,7 @@ public class NewGame extends AppCompatActivity
             }
         });
 
-        //Kalender
-        //TODO: Lokalisierung
-        Calendar c = Calendar.getInstance(Locale.GERMAN);
+        Calendar c = Calendar.getInstance(Locale.getDefault());
 
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
@@ -140,7 +138,7 @@ public class NewGame extends AppCompatActivity
         db.close();
 
         d.setArguments(b);
-        d.show(getFragmentManager(), "Test");
+        d.show(getFragmentManager(), "Selectplayer");
     }
 
     //Wenn ein Spieler vom Dialog ausgewählt wurde über den Dialog SelectPlayer
@@ -148,7 +146,7 @@ public class NewGame extends AppCompatActivity
     public void onClickPlayer(DialogFragment dialog,String selectedplayer ) {
         Toast toast = Toast.makeText(
                 getApplicationContext(),
-                selectedplayer + " ist der erste Geber!",
+                String.format(Locale.getDefault(),getString(R.string.first_giver_is), selectedplayer),
                 Toast.LENGTH_LONG);
         toast.show();
 

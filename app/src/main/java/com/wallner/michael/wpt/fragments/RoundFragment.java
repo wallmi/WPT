@@ -1,6 +1,7 @@
 package com.wallner.michael.wpt.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,12 +17,16 @@ import com.wallner.michael.wpt.db.WPTDataSource;
 import com.wallner.michael.wpt.GameRules;
 import com.wallner.michael.wpt.R;
 
+import java.util.Locale;
+
 import butterknife.BindView;        //Butterknife
 import butterknife.ButterKnife;     //Butterknife
 
 
 public class RoundFragment extends Fragment
         implements SeekBar.OnSeekBarChangeListener {
+
+    int round = -1; int gameID = -1;
 
     @BindView(R.id.p1_name) TextView p1_name;
     @BindView(R.id.p2_name) TextView p2_name;
@@ -81,7 +86,7 @@ public class RoundFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         ButterKnife.bind(this, view);       //Butterknife
@@ -93,8 +98,12 @@ public class RoundFragment extends Fragment
                 p4_done, p5_done, p6_done
         };
 
-        int round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
-        int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+        Bundle arg = getArguments();
+
+        if (arg != null) {
+            round = arg.getInt(WPTDataSource.COLUMN_ROUNDS_NR);
+            gameID = arg.getInt(WPTDataSource.COLUMN_GAMES_ID);
+        }
 
         //Optionen DB öffnen
         WPTDataSource db = new WPTDataSource(getContext());
@@ -166,12 +175,12 @@ public class RoundFragment extends Fragment
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
+        //Integer round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
         WPTDataSource db = new WPTDataSource(getContext());
-        int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+        //int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
         db.open();
         SeekBar[] Seekbars = {
                 p1_hip, p2_hip, p3_hip,
@@ -189,16 +198,16 @@ public class RoundFragment extends Fragment
         }
 
         if (roundfinished)
-            Toast.makeText(getContext(),
-                    "Runde " +  round.toString()  + " ist schon beendet",
+            Toast.makeText(getContext(),String.format(Locale.getDefault(),
+                    getString(R.string.round_finished),round),
                     Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onProgressChanged(SeekBar p, int progress,boolean fromUser) {
 
-        int round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
-        int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
+        //int round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
+        //int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
 
         WPTDataSource db = new WPTDataSource(getContext());
         db.open();
