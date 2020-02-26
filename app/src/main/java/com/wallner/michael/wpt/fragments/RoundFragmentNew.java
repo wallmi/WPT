@@ -3,6 +3,7 @@ package com.wallner.michael.wpt.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +14,20 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wallner.michael.wpt.db.WPTDataSource;
 import com.wallner.michael.wpt.GameRules;
 import com.wallner.michael.wpt.R;
+import com.wallner.michael.wpt.ValueSelector;
+import com.wallner.michael.wpt.db.WPTDataSource;
 
 import java.util.Locale;
 
-import butterknife.BindView;        //Butterknife
-import butterknife.ButterKnife;     //Butterknife
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
-public class RoundFragment extends Fragment
-        implements SeekBar.OnSeekBarChangeListener {
-
+public class RoundFragmentNew extends Fragment
+        implements ValueSelector.OnValueChangeListener
+        {
     int round = -1; int gameID = -1;
 
     @BindView(R.id.p1_name) TextView p1_name;
@@ -35,19 +37,19 @@ public class RoundFragment extends Fragment
     @BindView(R.id.p5_name) TextView p5_name;
     @BindView(R.id.p6_name) TextView p6_name;
 
-    @BindView(R.id.p1_hip) SeekBar p1_hip;
-    @BindView(R.id.p2_hip) SeekBar p2_hip;
-    @BindView(R.id.p3_hip) SeekBar p3_hip;
-    @BindView(R.id.p4_hip) SeekBar p4_hip;
-    @BindView(R.id.p5_hip) SeekBar p5_hip;
-    @BindView(R.id.p6_hip) SeekBar p6_hip;
+    @BindView(R.id.p1_hip) ValueSelector p1_hip;
+    @BindView(R.id.p2_hip) ValueSelector p2_hip;
+    @BindView(R.id.p3_hip) ValueSelector p3_hip;
+    @BindView(R.id.p4_hip) ValueSelector p4_hip;
+    @BindView(R.id.p5_hip) ValueSelector p5_hip;
+    @BindView(R.id.p6_hip) ValueSelector p6_hip;
 
-    @BindView(R.id.p1_done) SeekBar p1_done;
-    @BindView(R.id.p2_done) SeekBar p2_done;
-    @BindView(R.id.p3_done) SeekBar p3_done;
-    @BindView(R.id.p4_done) SeekBar p4_done;
-    @BindView(R.id.p5_done) SeekBar p5_done;
-    @BindView(R.id.p6_done) SeekBar p6_done;
+    @BindView(R.id.p1_done) ValueSelector p1_done;
+    @BindView(R.id.p2_done) ValueSelector p2_done;
+    @BindView(R.id.p3_done) ValueSelector p3_done;
+    @BindView(R.id.p4_done) ValueSelector p4_done;
+    @BindView(R.id.p5_done) ValueSelector p5_done;
+    @BindView(R.id.p6_done) ValueSelector p6_done;
 
     @BindView(R.id.p1_points) TextView p1_points;
     @BindView(R.id.p2_points) TextView p2_points;
@@ -56,7 +58,6 @@ public class RoundFragment extends Fragment
     @BindView(R.id.p5_points) TextView p5_points;
     @BindView(R.id.p6_points) TextView p6_points;
 
-
     @BindView(R.id.p1_dealer) ImageView p1_dealer;
     @BindView(R.id.p2_dealer) ImageView p2_dealer;
     @BindView(R.id.p3_dealer) ImageView p3_dealer;
@@ -64,18 +65,18 @@ public class RoundFragment extends Fragment
     @BindView(R.id.p5_dealer) ImageView p5_dealer;
     @BindView(R.id.p6_dealer) ImageView p6_dealer;
 
-    @BindView(R.id.p4)    LinearLayout p4;
-    @BindView(R.id.p5)    LinearLayout p5;
-    @BindView(R.id.p6)    LinearLayout p6;
+    @BindView(R.id.p4)    ConstraintLayout p4;
+    @BindView(R.id.p5)    ConstraintLayout p5;
+    @BindView(R.id.p6)    ConstraintLayout p6;
 
     @BindView(R.id.all_done) TextView all_done;
     @BindView(R.id.all_hip) TextView all_hip;
 
-    public RoundFragment() {
+    public RoundFragmentNew() {
     }
 
-    public static RoundFragment newInstance(int roundNumber, int gameID) {
-        RoundFragment fragment = new RoundFragment();
+    public static RoundFragmentNew newInstance(int roundNumber, int gameID) {
+        RoundFragmentNew fragment = new RoundFragmentNew();
         Bundle args = new Bundle();
 
         args.putInt(WPTDataSource.COLUMN_ROUNDS_NR, roundNumber);
@@ -88,11 +89,10 @@ public class RoundFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
-       View view = inflater.inflate(R.layout.fragment_game, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_game_new, container, false);
         ButterKnife.bind(this, view);       //Butterknife
 
-        SeekBar[] Seekbars = {
+        ValueSelector[] valueSelectors = {
                 p1_hip, p2_hip, p3_hip,
                 p4_hip, p5_hip, p6_hip,
                 p1_done, p2_done, p3_done,
@@ -109,14 +109,11 @@ public class RoundFragment extends Fragment
         //Optionen DB öffnen
         WPTDataSource db = new WPTDataSource(getContext());
         db.open();
-        //db.addRound(gameID,round);
 
-        //int anzp = Integer.parseInt(o.getValue("anzplayer"));
         int anzp = db.getAnzPlayerbyGameID(gameID);
 
         if (anzp < 4)
             p4.setVisibility(View.INVISIBLE);
-            //rootView.findViewById(R.id.p4).setVisibility(View.INVISIBLE);
 
         if (anzp < 5)
             p5.setVisibility(View.INVISIBLE);
@@ -137,9 +134,10 @@ public class RoundFragment extends Fragment
         if (anzp >= 6)
             p6_name.setText(playernames[5]);
 
-        for (SeekBar sb: Seekbars){
-            sb.setMax(round);
-            sb.setOnSeekBarChangeListener(this);
+        for (ValueSelector sb: valueSelectors){
+            sb.setMaxValue(round);
+            sb.setMinValue(0);
+            sb.setOnValueChangeListener(this);
         }
 
         p1_hip.setTag(WPTDataSource.COLUMN_ROUNDS_P1_HIP);
@@ -157,8 +155,8 @@ public class RoundFragment extends Fragment
         p6_done.setTag(WPTDataSource.COLUMN_ROUNDS_P6_DONE);
 
         int[] values = db.getRoundPoints(gameID,round);
-        for(int i=0; i<Seekbars.length; i++)
-            Seekbars[i].setProgress(values[i]);
+        for(int i=0; i<valueSelectors.length; i++)
+            valueSelectors[i].setValue(values[i]);
 
         //Ermittlung des Gebers in der Rund
         //GEBER = ((round -1) % anzp + 1 + (giver - 1)
@@ -183,7 +181,7 @@ public class RoundFragment extends Fragment
         WPTDataSource db = new WPTDataSource(getContext());
         //int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
         db.open();
-        SeekBar[] Seekbars = {
+        ValueSelector[] valueSelectors = {
                 p1_hip, p2_hip, p3_hip,
                 p4_hip, p5_hip, p6_hip,
                 p1_done, p2_done, p3_done,
@@ -192,10 +190,10 @@ public class RoundFragment extends Fragment
         boolean roundfinished = db.isRoundFinished(gameID,round);
         db.close();
 
-        for (SeekBar sb: Seekbars) {
+        for (ValueSelector vs: valueSelectors) {
             //sb.setProgress(0);
-            sb.callOnClick();
-            sb.setEnabled(!roundfinished);
+            vs.callOnClick();
+            vs.setEnabled(!roundfinished);
         }
 
         if (roundfinished)
@@ -205,45 +203,38 @@ public class RoundFragment extends Fragment
     }
 
     @Override
-    public void onProgressChanged(SeekBar p, int progress,boolean fromUser) {
-
+    public void onProgressChanged(ValueSelector vs, int progress) {
         //int round = getArguments().getInt(WPTDataSource.COLUMN_ROUNDS_NR);
         //int gameID = getArguments().getInt(WPTDataSource.COLUMN_GAMES_ID);
 
         WPTDataSource db = new WPTDataSource(getContext());
         db.open();
 
-        if (p.getId() == p1_done.getId() || p.getId() == p1_hip.getId())
-            p1_points.setText(GameRules.int2string(GameRules.getPoints(p1_hip.getProgress(), p1_done.getProgress())));
+        if (vs.getId() == p1_done.getId() || vs.getId() == p1_hip.getId())
+            p1_points.setText(GameRules.int2string(GameRules.getPoints(p1_hip.getValue(), p1_done.getValue())));
 
-        if (p.getId() == p2_done.getId() || p.getId() == p2_hip.getId())
-            p2_points.setText(GameRules.int2string(GameRules.getPoints(p2_hip.getProgress(),p2_done.getProgress())));
+        if (vs.getId() == p2_done.getId() || vs.getId() == p2_hip.getId())
+            p2_points.setText(GameRules.int2string(GameRules.getPoints(p2_hip.getValue(),p2_done.getValue())));
 
-        if (p.getId() == p3_done.getId() || p.getId() == p3_hip.getId())
-            p3_points.setText(GameRules.int2string(GameRules.getPoints(p3_hip.getProgress(),p3_done.getProgress())));
+        if (vs.getId() == p3_done.getId() || vs.getId() == p3_hip.getId())
+            p3_points.setText(GameRules.int2string(GameRules.getPoints(p3_hip.getValue(),p3_done.getValue())));
 
-        if (p.getId() == p4_done.getId() || p.getId() == p4_hip.getId())
-            p4_points.setText(GameRules.int2string(GameRules.getPoints(p4_hip.getProgress(),p4_done.getProgress())));
+        if (vs.getId() == p4_done.getId() || vs.getId() == p4_hip.getId())
+            p4_points.setText(GameRules.int2string(GameRules.getPoints(p4_hip.getValue(),p4_done.getValue())));
 
-        if (p.getId() == p5_done.getId() || p.getId() == p5_hip.getId())
-            p5_points.setText(GameRules.int2string(GameRules.getPoints(p5_hip.getProgress(),p5_done.getProgress())));
+        if (vs.getId() == p5_done.getId() || vs.getId() == p5_hip.getId())
+            p5_points.setText(GameRules.int2string(GameRules.getPoints(p5_hip.getValue(),p5_done.getValue())));
 
-        if (p.getId() == p6_done.getId() || p.getId() == p6_hip.getId())
-            p6_points.setText(GameRules.int2string(GameRules.getPoints(p6_hip.getProgress(),p6_done.getProgress())));
+        if (vs.getId() == p6_done.getId() || vs.getId() == p6_hip.getId())
+            p6_points.setText(GameRules.int2string(GameRules.getPoints(p6_hip.getValue(),p6_done.getValue())));
 
-        all_done.setText(GameRules.int2string(p1_done.getProgress()+p2_done.getProgress()+p3_done.getProgress()
-                +p4_done.getProgress()+p5_done.getProgress()+p6_done.getProgress()));
+        all_done.setText(GameRules.int2string(p1_done.getValue()+p2_done.getValue()+p3_done.getValue()
+                +p4_done.getValue()+p5_done.getValue()+p6_done.getValue()));
 
-        all_hip.setText(GameRules.int2string(p1_hip.getProgress()+p2_hip.getProgress()+p3_hip.getProgress()
-                +p4_hip.getProgress()+p5_hip.getProgress()+p6_hip.getProgress()));
+        all_hip.setText(GameRules.int2string(p1_hip.getValue()+p2_hip.getValue()+p3_hip.getValue()
+                +p4_hip.getValue()+p5_hip.getValue()+p6_hip.getValue()));
 
-        db.setPoints(gameID, round, p.getTag().toString(), p.getProgress());
+        db.setPoints(gameID, round, vs.getTag().toString(), vs.getValue());
         db.close();
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {        }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {        }
+        }
 }

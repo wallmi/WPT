@@ -23,7 +23,7 @@ import android.widget.Toast;
 import android.content.Context;
 import android.content.res.Resources.Theme;
 
-import com.wallner.michael.wpt.fragments.RoundFragment;
+import com.wallner.michael.wpt.fragments.RoundFragmentNew;
 import com.wallner.michael.wpt.db.WPTDataSource;
 import com.wallner.michael.wpt.fragments.ShowScore;
 
@@ -33,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.wallner.michael.wpt.R.id.container;
+import static com.wallner.michael.wpt.R.id.invisible;
 
 
 public class Game extends AppCompatActivity {
@@ -87,11 +88,10 @@ public class Game extends AppCompatActivity {
                 }
                 else {
                     getSupportFragmentManager().beginTransaction()
-                            .replace(container, RoundFragment
+                            .replace(container, RoundFragmentNew
                                     .newInstance(round, gameID))
                             .commit();
                 }
-
                 WPTDataSource db = new WPTDataSource(getBaseContext());
                 db.open();
 
@@ -103,13 +103,15 @@ public class Game extends AppCompatActivity {
                 } else
                     fab.setVisibility(View.INVISIBLE);
 
+                if (db.getCurrentRound(gameID) - 1 ==
+                        GameRules.getRounds(db.getAnzPlayerbyGameID(gameID)))
+                    jump.setVisibility(View.INVISIBLE);
 
                 if (spinner.getSelectedItemPosition() == 0)
                     jump.setText(String.format(Locale.GERMAN,
                             getString(R.string.round_x), db.getCurrentRound(gameID)));
                 else
                     jump.setText(R.string.Scoreboard);
-
 
                 db.close();
             }

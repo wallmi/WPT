@@ -2,11 +2,15 @@ package com.wallner.michael.wpt;
 
 import android.content.Context;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * View to allow the selection of a numeric value by pressing plus/minus buttons.  Pressing and holding
@@ -47,6 +51,18 @@ public class ValueSelector extends RelativeLayout {
         super(context, attrs, defStyle);
         init(context);
     }
+
+    public interface OnValueChangeListener {
+        void onProgressChanged(ValueSelector valueSelector,int progress);
+    }
+
+    public void setEnabled (boolean enabled){
+        plusButton.setEnabled(enabled);
+        minusButton.setEnabled(enabled);
+    }
+
+
+    private OnValueChangeListener mOnValueChangeListener;
 
     /**
      * Get the current minimum value that is allowed
@@ -110,6 +126,10 @@ public class ValueSelector extends RelativeLayout {
         valueTextView.setText(String.valueOf(value));
     }
 
+    public void setOnValueChangeListener(OnValueChangeListener l) {
+        mOnValueChangeListener = l;
+    }
+
     private void init(Context context) {
         rootView = inflate(context, R.layout.valueselector, this);
         valueTextView = (TextView) rootView.findViewById(R.id.valueTextView);
@@ -169,6 +189,32 @@ public class ValueSelector extends RelativeLayout {
                 return false;
             }
         });
+
+        valueTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            //MW für den Listener wenn sich der Wert des Textfeldes verändert änderung
+            //weitergeben
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValueChanged(Integer.parseInt(valueTextView.getText().toString()));
+            }
+        });
+    }
+
+    //MW Listener Wert übergeben
+    private void ValueChanged(int value) {
+        if (mOnValueChangeListener != null) {
+            mOnValueChangeListener.onProgressChanged(this,value);
+        }
     }
 
     private void incrementValue() {
@@ -202,5 +248,6 @@ public class ValueSelector extends RelativeLayout {
                 handler.postDelayed(new AutoDecrementer(), REPEAT_INTERVAL_MS);
             }
         }
+
     }
 }
